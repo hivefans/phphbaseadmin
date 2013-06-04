@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title><?php echo $common_title?></title>
 	<meta name="description" content="phpHBaseAdmin,HBase,Hbase,Apache,Hadoop,php,admin">
-	<meta name="author" content="Xianglei">
+	<meta name="author" content="Shidongjie,Xianglei">
 	<!-- end: Meta -->
 
 	<!-- start: Mobile Specific -->
@@ -13,7 +13,7 @@
 	<!-- end: Mobile Specific -->
 
 	<!-- start: CSS -->
-     <link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
+    <link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
     <link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
     <link href="<?php echo $this->config->base_url();?>css/custom.css" rel="stylesheet">
 	<link id="bootstrap-style" href="<?php echo $this->config->base_url();?>css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,8 @@
     <script src="<?php echo $this->config->base_url();?>js/jquery.qtip-1.0.0-rc3.min.js"></script>
 	<script src="<?php echo $this->config->base_url();?>js/highcharts.js"></script>
 	<script src="<?php echo $this->config->base_url();?>js/highcharts-more.js"></script>
-	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
+	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script> 
+    <script src="<?php echo $this->config->base_url();?>js/my97/WdatePicker.js"></script>  
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
     
 	<!-- end: JavaScript-->

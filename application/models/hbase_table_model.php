@@ -30,6 +30,7 @@ class Hbase_table_model extends CI_Model
 		
 		$this->hbase_host = $this->config->item('hbase_host');
 		$this->hbase_port = $this->config->item('hbase_port');
+        $this->hbaseadmin_port = $this->config->item('hbaseadmin_port');
 		$this->socket = new TSocket($this->hbase_host, $this->hbase_port);
 		$this->socket->setSendTimeout(30000);
 		$this->socket->setRecvTimeout(30000);
@@ -37,13 +38,27 @@ class Hbase_table_model extends CI_Model
 		$this->protocol = new TBinaryProtocol($this->transport);
 		$this->hbase = new HbaseClient($this->protocol);
 	}
+    
+    public function headnav()
+    {
+        $this->lang->load('commons');		
+		$data['common_lang_set'] = $this->lang->line('common_lang_set');
+		$data['common_title'] = $this->lang->line('common_title');
+		$this->load->view('header',$data);
+        $data['common_table_view'] = $this->lang->line('common_table_view');		
+		$data['common_table_list'] = $this->lang->line('common_table_list');
+		$data['common_create_table'] = $this->lang->line('common_create_table');        
+        $data['common_table_deltable'] = $this->lang->line('common_table_deltable');
+        $data['common_monitor'] = $this->lang->line('common_monitor');
+        $this->load->view('nav_bar',$data);  
+    }
 	
     public function get_hbase_info()
     {
         try
         {
            $host=$this->hbase_host;
-           $port="60010";
+           $port=$this->hbaseadmin_port;
            $url="http://".$host.":".$port."/jmx";
            $data=file_get_contents($url);
            return $data;
@@ -54,6 +69,22 @@ class Hbase_table_model extends CI_Model
 		}
         
     }
+    
+    public function get_zookeeper_info()
+    {
+        try
+        {
+           
+        }
+        catch (Exception $e)
+		{
+			echo 'Caught exception: '.  $e->getMessage(). "\n";
+		}
+        
+    }
+    
+    
+    
 	public function get_table_names()
 	{
 		try
@@ -98,18 +129,25 @@ class Hbase_table_model extends CI_Model
 			echo 'Caught exception: '.  $e->getMessage(). "\n";
 		}
 	}
-    public function get_table_records($table_name)
+    public function get_table_records($table_name,$count)
     {
         try
         {
            $this->transport->open();
            $scan = new TScan();
-           $scanner = $this->hbase->scannerOpenWithScan($table_name,$scan);
-           $get_arr = $this->hbase->scannerGetList($scanner,100);
-           $this->transport->close();
-           if($get_arr==null) break;
-           return $get_arr;
-                
+           $scan->caching=200;
+           $scanner = $this->hbase->scannerOpenWithScan($table_name,$scan);           
+           $get_arr = $this->hbase->scannerGetList($scanner,$count);           
+           if($get_arr==null)
+           {
+              return "null";
+           }
+           else
+           {
+               return $get_arr;
+           }
+           $this->transport->close();          
+           
         }
         catch(exception $e)
         {
@@ -117,6 +155,53 @@ class Hbase_table_model extends CI_Model
         } 
         
     }
+    
+    public function search_table($table_name,$scomop,$srowop,$startrow,$ecomop,$erowop,$stoprow,$timestamp,$vcomop,$valop,$value)
+    {
+        try
+        {
+           $this->transport->open();
+           $count=200;
+           $filter="(PrefixFilter(''))";
+           if($startrow!="" || $stoprow!="")
+           {
+             $filter.="AND (RowFilter({$scomop}, '{$srowop}:{$startrow}')) AND (RowFilter({$ecomop}, '{$erowop}:{$stoprow}'))";
+            
+           }
+                      
+           if($timestamp!="")
+           {
+              $filter.="AND (TimestampsFilter({$timestamp}))";
+           }
+           
+           if($value!="")
+           {
+              $filter.="AND (ValueFilter({$vcomop}, '{$valop}:{$value}'))";
+           }
+           $scan = new TScan();
+           $scan->caching=200;
+           $scan->filterString=$filter;  
+           $scanner = $this->hbase->scannerOpenWithScan($table_name,$scan);
+           $get_arr = $this->hbase->scannerGetList($scanner,$count);           
+           if($get_arr==null)
+           {
+              return "null";
+           }
+           else
+           {
+              return $get_arr;
+              
+           }
+           $this->transport->close(); 
+            
+        }
+        catch(Exception $e)
+        {
+           echo 'Caught exception: '.  $e->getMessage(). "\n"; 
+        }
+        
+    }
+    
     
 	public function enable_table($table_name)
 	{

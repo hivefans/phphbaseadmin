@@ -196,9 +196,9 @@ function ConfirmDropTables()
  #modalbody li {
      margin: 10px 0 0 0;
  }
- label {
+ #modalbody label {
     display: inline-block;
-    width: 150px;
+    width: 120px;
      text-align: right;
   }
  </style>
@@ -262,7 +262,7 @@ function ConfirmDropTables()
   </div>
   <div class="modal-footer">    
     <a href="#" id="delall" class="btn btn-danger" onclick="ConfirmDropTables();">delete</a>
-    <a href="#" class="btn" data-dismiss="modal">关闭</a>
+    <a href="#" class="btn" data-dismiss="modal">close</a>
   </div>
 </div>
 <!-- delete table div end-->

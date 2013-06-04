@@ -231,18 +231,18 @@ function closemodal(divid)
               <label class="control-label span2" for="searchinput">timestamp</label>
               <div class="controls span8">
                 <input id="starttime" name="starttime" type="text" placeholder="" class="input-medium search-query"> 
-                 </label>               
+                
+                </label>               
               </div>
              
-            </div> 
+            </div>
             
             <!-- Search input-->
             <div class="control-group">
               <label class="control-label span2" for="searchinput">value</label>
               <div class="controls span8">
-              
-                <input id="wordvalue" name="wordvalue" type="text" placeholder="" class="input-medium search-query" />
-                 <select id="vcomoption" name="vcomoption" class="input-mini">
+                <input id="wordvalue" name="wordvalue" type="text" placeholder="" class="input-medium search-query">
+                <select id="vcomoption" name="vcomoption" class="input-mini">
                       <option><</option>
                       <option><=</option>
                       <option>=</option>
@@ -275,106 +275,96 @@ function closemodal(divid)
 
 
 <script>
-
-
-        
-  $(document).ready(function () {
-                    var crudServiceBaseUrl = "<?php echo $this->config->base_url();?>index.php/tables",
-                         
-                        dataSource = new kendo.data.DataSource({                            
-                            transport: {                            
-                                read:  {
-                                    url: crudServiceBaseUrl+"/gettablerecords/<?php echo $tablename?>",
-                                    dataType: "json"
-                                },                                
-                                update: {
-                                    url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
-                                    dataType: "json",
-                                    data:"GET"                                   
-                                },
-                                destroy: {
-                                    url: crudServiceBaseUrl + "/destroyrecords/<?php echo $tablename?>",
-                                    dataType: "json",
-                                    data:"GET" 
-                                },
-                                create: {
-                                    url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
-                                    dataType: "json",
-                                    data:"GET"
-                                },
-                                parameterMap: function(options, operation) {                                    
-                                    if (operation !== "read" && options.models) {
-                                        return {models: kendo.stringify(options.models)};
-                                    }
-                                }
-                            },                                              
-                            batch: true,
-                           
-                            pageSize: 10,                                                                                                            
-                            schema: {
-                               
-                                model: {
-                                    id: "row",
-                                    fields: { 
-                                        row: { editable: true, nullable: true,validation: { required: true} },                                        
-                                        columnfamily: { defaultValue: "<?php echo $column?>" },
-                                        columnqualifier: { type: "string", validation: { required: true} },
-                                        timestamp: {type: "number",validation: { min: 0, required: true },defaultValue: <?php echo time();?>},
-                                        value: { type: "string", validation: { required: true } }
-                                            }
-                                      }                                      
-                                   },
-                            requestEnd: onRequestEnd
-                        });
-                      
-                    $("#grid").kendoGrid({
-                        dataSource: dataSource,
-                        navigatable: true,
-                        sortable: true,                     
-                        filterable:true,
-                        resizable: true,                                                
-                        pageable:true,                        
-                        columnMenu: true,                                       
-                        toolbar: ["create"],
-                        columns: [
+          
+$(document).ready(function () {
+    
+      
+       var data=<?php echo $searchrecord?> ;
+       var crudServiceBaseUrl = "<?php echo $this->config->base_url();?>index.php/tables";
+       
+       $("#grid").kendoGrid({
+    dataSource: {
+        data:data, 
+        transport: {
+        read: function(command) {    
+            command.success(data);         
+        },
+         create: function(command) {        
+             $.ajax({
+                url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
+                data: {models:'[{"row":"'+command.data.models[0]["row"]+'","columnfamily":"'+command.data.models[0]["columnfamily"]+'","columnqualifier":"'+command.data.models[0]["columnqualifier"]+'","timestamp":"'+command.data.models[0]["timestamp"]+'","value":"'+command.data.models[0]["value"]+'"}]'},
+                success: function (result) {
+                    alert("success");
+                    $(location).attr('href', crudServiceBaseUrl+"/listtablerecords/<?php echo $tablename?>");
+                   }
+                 });
+                  
+        },
+        update: function(command) {                         
+            $.ajax({
+                url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
+                data: {models:'[{"row":"'+command.data.models[0]["row"]+'","columnfamily":"'+command.data.models[0]["columnfamily"]+'","columnqualifier":"'+command.data.models[0]["columnqualifier"]+'","timestamp":"'+command.data.models[0]["timestamp"]+'","value":"'+command.data.models[0]["value"]+'"}]'},
+                success: function (result) {
+                    alert("success");
+                    $(location).attr('href', crudServiceBaseUrl+"/listtablerecords/<?php echo $tablename?>");
+                   }
+                 });
+        },
+         destroy: function(command) {        
+             $.ajax({
+                url:crudServiceBaseUrl + "/destroyrecords/<?php echo $tablename?>",
+                data: {models:'[{"row":"'+command.data.models[0]["row"]+'","columnfamily":"'+command.data.models[0]["columnfamily"]+'","columnqualifier":"'+command.data.models[0]["columnqualifier"]+'","timestamp":"'+command.data.models[0]["timestamp"]+'","value":"'+command.data.models[0]["value"]+'"}]'},
+                success: function (result) {
+                    alert("success");
+                    $(location).attr('href', crudServiceBaseUrl+"/listtablerecords/<?php echo $tablename?>");
+                   }
+                 });      
+        }
+      
+    },             
+        batch: true,
+        pageSize: 10,
+        schema: {
+            model: {
+                 id: "row",
+                 fields: { 
+                   row: { editable: true, nullable: true,validation: { required: true} },                                        
+                   columnfamily: {editable: true, type: "string", validation: { required: true} },
+                   columnqualifier: { type: "string", validation: { required: true} },
+                   timestamp: {type: "string",defaultValue: <?php echo time();?>},
+                   value: { type: "string", validation: { required: true } }
+                    }
+            }
+        }
+    },    
+    editable: true,
+    toolbar: ["create"],      
+    scrollable: true,
+    sortable: true,
+    resizable: true,
+    filterable: false,
+    pageable: true,
+    columns: [
                             { field: "row", title: "row key"},
-                            { field: "columnfamily",title: "column family",editor: categoryDropDownEditor, template: "#=columnfamily#" },
-                            { field: "columnqualifier", title: "column qualifier" },
-                            { field: "timestamp", title: "timestamp",format: "{0:0}"},
+                            { field: "columnfamily",title: "column family"},
+                            { field: "columnqualifier", title: "column qualifier"},
+                            { field: "timestamp", title: "timestamp" },
                             { field: "value",title:"value"},
-                            { command: ["edit","destroy"], title: "&nbsp;"}],                            
-                        editable: "inline"
-                    });
-                     
-                    function categoryDropDownEditor(container, options) {
-                    $('<input data-text-field="columnfamily" data-value-field="row" data-bind="value:' + options.field + '"/>')
-                        .appendTo(container)                        
-                        .kendoDropDownList({
-                            autoBind: false,                           
-                            dataSource: {                               
-                                transport: {
-                                    read:{
-                                       dataType: "json",
-                                       url: crudServiceBaseUrl+"/getcolumnjson/<?php echo $tablename?>" 
-                                    }
-                                    
-                                }
-                            }
-                            
-                        });
-                        
-                };                
-                
-                     function onRequestEnd(e) { 
-                           if(e.type=="update" || e.type=="create")
-                             {                                
-                                 alert(e.response[0].result);
-                                 location.reload();
-                                                                 
-                             }  
-                       };
+                            { command: ["edit","destroy"], title: "&nbsp;"}],
+    editable: "popup"
+});
+
+$("#sync").click(function() {
+    // sync the dataSource 
+    $("#grid").data("kendoGrid").dataSource.sync();
+});
+
+
+
                
- });
+ });  
+        
+ 
                 
                 
 </script>

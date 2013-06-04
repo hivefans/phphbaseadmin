@@ -6,24 +6,11 @@ class Tables extends CI_Controller
 	{
 		parent::__construct();
 	}
-	public function headnav()
-    {
-        $this->lang->load('commons');		
-		$data['common_lang_set'] = $this->lang->line('common_lang_set');
-		$data['common_title'] = $this->lang->line('common_title');
-		$this->load->view('header',$data);
-        $data['common_table_view'] = $this->lang->line('common_table_view');		
-		$data['common_table_list'] = $this->lang->line('common_table_list');
-		$data['common_create_table'] = $this->lang->line('common_create_table');
-        
-        $data['common_table_deltable'] = $this->lang->line('common_table_deltable');
-        $data['common_monitor'] = $this->lang->line('common_monitor');
-        $this->load->view('nav_bar',$data);  
-    }
+	
 	public function Index()
-	{
-	    $this->headnav();
+	{	    
 		$this->load->model('hbase_table_model','table');
+        $this->table->headnav();
         $hbaseinfo =$this->table->get_hbase_info();
         $hbasedata=json_decode($hbaseinfo,true);
         foreach($hbasedata["beans"] as $mbean)
@@ -119,44 +106,111 @@ class Tables extends CI_Controller
         $column=rtrim($column,",");
         return $column; 
     } 
-    
-    public function filtervalue($value)
-    {
-       $value=str_replace("\"","\\\"",$value); 
-       $value=json_encode($value);
-       if(preg_match("/u0/",$value))
-         {
-           $value="";
-         }
-       $value=json_decode($value); 
-       return $value; 
-    }
-    public function GetTableRecords($table_name)
-    {
-        $this->load->model('hbase_table_model', 'table');
-        $records= $this->table->get_table_records($table_name);        
+     public function GetColumnJson($table_name)
+     {
+        $column=$this->GetColumn($table_name);
+        $column=explode(",",$column);
         $result="";
-        foreach($records as $index=>$cols){            
-             foreach($cols->columns as $key=>$vals)
-               {  
-                  $row=$cols->row;
-                  $row=$this->filtervalue($row);
-                  
-                  $column=explode(":",$key);
-                  $column[0]=$this->filtervalue($column[0]);
-                  $column[1]=$this->filtervalue($column[1]);
-                  $value=$vals->value;
-                  $value=$this->filtervalue($value);
-                  //$value=json_encode($value);
-                  //$value=str_replace("{","\{",$value);                
-                  $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
-                  $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":\"".$value."\"},";
-               }
+        foreach($column as $col)
+        {
+           $result.='{"columnfamily":"'.$col.'"},'; 
         }
         $result=rtrim($result,",");
-        $result= "[".$result."]";
-        print_r($result);       
+        $result='['.$result.']';
+        echo $result;
+     }
+    
+    public function GetTableRecords($table_name)
+    {
+        $this->load->model('hbase_table_model', 'table');        
+        $count=200;
+        $records= $this->table->get_table_records($table_name,$count); 
+        if(is_array($records))
+        {       
+            $result="";
+            foreach($records as $index=>$cols){            
+                foreach($cols->columns as $key=>$vals)
+                 {  
+                    $row=$cols->row;                          
+                    $column=explode(":",$key);                        
+                    $value=$vals->value;                         
+                    $value=json_encode($value);                        
+                    $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
+                    $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";
+                  }
+             }
+              
+            $result=rtrim($result,",");
+            $result= '['.$result.']';
+            echo $result; 
+        }
+        else
+        {
+            echo '{"row":"","columnfamily":""}'; 
+        }         
     }
+    
+    public function SearchTable($table_name)
+    {        
+		$this->load->model('hbase_table_model','table');
+        $this->table->headnav();
+		$this->load->view('div_fluid');
+		$this->load->view('div_row_fluid');		
+		$data['tablename']=$table_name;	
+        $data['searchrecord']=$this->SearchTableQuery($table_name);
+        
+		$this->load->view('table_lists',$data);        	
+		$this->load->view('table_search',$data);		
+		$this->load->view('div_end');
+		$this->load->view('div_end');		
+		$this->load->view('footer'); 
+    }
+    
+    public function SearchTableQuery($table_name)
+    {
+       $scomop=$this->input->post("scomoption");
+       $srowop=$this->input->post("srowoption");
+       $srow=$this->input->post("startrow"); 
+       $ecomop=$this->input->post("ecomoption");
+       $erowop=$this->input->post("erowoption");
+       $erow=$this->input->post("stoprow");
+       $timestamp=$this->input->post("starttime");
+       $vcomop=$this->input->post("vcomoption");
+       $valueoption=$this->input->post("valueoption");
+       $value=$this->input->post("wordvalue");
+       
+       $this->load->model('hbase_table_model', 'table');
+       $records= $this->table->search_table($table_name,$scomop,$srowop,$srow,$ecomop,$erowop,$erow,$timestamp,$vcomop,$valueoption,$value);
+      
+       if(is_array($records))
+        {       
+            $result="";
+            foreach($records as $index=>$cols){            
+                foreach($cols->columns as $key=>$vals)
+                 {  
+                    $row=$cols->row;                          
+                    $column=explode(":",$key);                        
+                    $value=$vals->value;                         
+                    $value=json_encode($value);                        
+                    $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
+                    $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";
+                  }
+             }
+              
+            $result=rtrim($result,",");
+            $result= '['.$result.']';
+            
+        }
+        else
+        {
+            $result='{"row":""}'; 
+        } 
+        
+        return($result);       
+        
+    }
+    
+    
     
     public function UpdateRecords($table_name)
     {
@@ -174,8 +228,8 @@ class Tables extends CI_Controller
         'value' => $value          
         ) ),  
         );
-       $colres=$this->GetColumn($table_name);  
-       if(strpos($colres,$column=$mutationarr[0]["columnfamily"]))
+       $colres=explode(",",$this->GetColumn($table_name));         
+       if(in_array($mutationarr[0]["columnfamily"],$colres))
        {                   
           $result=$this->table->mutate_rowts($table_name,$row,$mutations,$timestamp);
           $mutationarr[0]["result"]=$result;
@@ -184,7 +238,7 @@ class Tables extends CI_Controller
        {
           $mutationarr[0]["result"]="column family not exist";
        }        
-            
+          
        echo(json_encode($mutationarr));        
     }
     
@@ -214,12 +268,16 @@ class Tables extends CI_Controller
     
     public function ListTableRecords($table_name)
     {
-        $this->headnav();
+        
 		$this->load->model('hbase_table_model','table');
+        $this->table->headnav();
 		$this->load->view('div_fluid');
 		$this->load->view('div_row_fluid');		
 		$data['tablename']=$table_name;	
-		$this->load->view('table_lists',$data);        	
+		$this->load->view('table_lists',$data);  
+        $columns=$this->GetColumn($table_name);
+        $columns=explode(",",$columns);
+        $data['column']=$columns[0];      	
 		$this->load->view('table_records',$data);		
 		$this->load->view('div_end');
 		$this->load->view('div_end');		
