@@ -13,6 +13,9 @@ Main features：<br>
        delete table   <br>
        update record<br>
        delete record<br>
-![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/createtable.png)    
-     
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/main.png)   
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/createtable.png) 
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/search.png) 
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/record.png) 
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/metadata.png) 
 
