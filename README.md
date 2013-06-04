@@ -19,3 +19,10 @@ Main features：<br>
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/record.png) 
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/metadata.png) 
 
+<br>
+Install:<br>
+(1) setup apache or nginx <br>
+(2) git clone phphbaseadmin ,put phphbaseadmin directory to web app directory <br>
+(3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
+
+
