@@ -13,5 +13,6 @@ Main features：<br>
        delete table   <br>
        update record<br>
        delete record<br>
+<img src="https://github.com/hivefans/phphbaseadmin/blob/master/screeshot/main.png" />       
      
 
