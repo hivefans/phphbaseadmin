@@ -3,7 +3,8 @@ phphbaseadmin
 
 phphbaseadmin is a hbase admin web tool,it developed using thrift interface、php CodeIgniter framework .
 
-Main features：<br>
+Main features：
+--------------
        view table record <br>
        create table <br>
        batch delete tables<br>
@@ -20,7 +21,8 @@ Main features：<br>
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/metadata.png) 
 
 <br>
-Install:<br>
+Install:
+--------------------
 (1) setup apache or nginx <br>
 (2) git clone phphbaseadmin ,put phphbaseadmin directory to web app directory <br>
 (3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
