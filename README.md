@@ -26,6 +26,7 @@ Install:<br>
 (3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
 (4) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
      hbase thrift start  or  bin/hbase-daemon.sh start thrift
-
+<br>
+Alpha 中，各路牛人都来支持一下，加入开发啊！
 
 
