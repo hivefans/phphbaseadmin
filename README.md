@@ -24,5 +24,8 @@ Install:<br>
 (1) setup apache or nginx <br>
 (2) git clone phphbaseadmin ,put phphbaseadmin directory to web app directory <br>
 (3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
+(4) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
+     hbase thrift start  or  bin/hbase-daemon.sh start thrift
+
 
 
