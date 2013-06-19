@@ -330,7 +330,7 @@ function closemodal(divid)
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
                         navigatable: true,
-                        sortable: true,                     
+                        sortable: true,                                             
                         filterable:true,
                         resizable: true,                                                
                         pageable:true,                        

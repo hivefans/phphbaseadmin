@@ -19,17 +19,16 @@
 	<link id="bootstrap-style" href="<?php echo $this->config->base_url();?>css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo $this->config->base_url();?>css/bootstrap-responsive.min.css" rel="stylesheet">
    
-    
 	<!-- end: CSS -->
 	
 	<!-- start: JavaScript-->
-	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
-    <script src="<?php echo $this->config->base_url();?>js/jquery.qtip-1.0.0-rc3.min.js"></script>
+	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script> 
+    <script src="<?php echo $this->config->base_url();?>js/jquery.qtip-1.0.0-rc3.min.js"></script>   
 	<script src="<?php echo $this->config->base_url();?>js/highcharts.js"></script>
 	<script src="<?php echo $this->config->base_url();?>js/highcharts-more.js"></script>
-	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script> 
-    <script src="<?php echo $this->config->base_url();?>js/my97/WdatePicker.js"></script>  
+	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
+     
     
 	<!-- end: JavaScript-->
 
