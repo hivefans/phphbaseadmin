@@ -8,12 +8,13 @@ $.getJSON('<?php echo $this->config->base_url();?>index.php/tables/tablelist/', 
 		html += '<a href="<?php echo $this->config->base_url();?>index.php/tables/listtablerecords/' + content + '">'+ content +'</a>';
 		html += '</td></tr>';
 	});
-	$('#tablenames').append(html);
-         
+	$('#tablenames').append(html);   
      
 });
+
+
 </script>
 <div class="span2" style="height: 600px;">
 	<table class="table table-hover" id="tablenames">		
-	</table>
+	</table>   
 </div>

@@ -18,8 +18,13 @@
                     <li><a href="javascript:;" onclick="showdeltable();"><?php echo $common_table_deltable;?></a></li>   
                       </ul>
                 </li>
-				<li <?php if($this->router->class == "monitor"){ echo "class=\"active\"";}?>>
-					<a href="<?php echo $this->config->base_url();?>index.php/monitor/index/"><?php echo $common_monitor;?></a>
+				<li class="dropdown" <?php if($this->router->class == "monitor"){ echo "class=\"active\"";}?>>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $common_monitor;?>  <b class="caret"></b></a> 
+				   <ul class="dropdown-menu bottom-up pull-right">
+            	    <li><a href="<?php echo $this->config->base_url();?>index.php/monitor/zookeeper/">ZooKeeper Monitor</a></li>
+                    <li><a href="<?php echo $this->config->base_url();?>index.php/monitor/hbase/">Hbase Monitor</a></li>
+                       
+                      </ul>
 				</li>
 				</ul>
 			</div>
