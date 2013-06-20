@@ -27,4 +27,43 @@ class Monitor extends CI_Controller
         $this->monitor->clusteradd($clustername,$serverlist);
         echo "add cluster success";
     }
+    public function Cluster_monitor()
+    {
+        $this->load->model('hbase_table_model','hbasetable');
+        $this->hbasetable->headnav();
+        $this->load->view('div_fluid');
+		$this->load->view('div_row_fluid');
+        $this->load->view('zookeeper_admin');
+        $this->load->model('Zookeeper_model','monitor');
+        $data["clusterinfo"]=$this->monitor->getcluster();        
+		$this->load->view('cluster_monitor',$data);        
+        $this->load->view('div_end');
+		$this->load->view('div_end');		
+		$this->load->view('footer');
+    }
+    public function getserverinfo()
+    {
+        $qry=$this->input->get("qry");
+        $command=$this->input->get("command");
+        $server=$this->input->get("server");
+        $port=$this->input->get("port");
+        $this->load->model('Zookeeper_model','monitor');
+        $host="http://192.168.205.208:8080";
+        if($qry=="stat")
+         {
+           $url=$host."/stat?server=".$server."&port=".$port."&command=".$command;             
+         }
+         elseif($qry=="get")
+         {
+            $url=$host."/get?server=".$server."&port=".$port;
+         }
+         elseif($qry=="getchild")
+         {
+            $url=$host."/getchild?server=".$server."&port=".$port;
+         }
+        
+        $result=$this->monitor->getnodeinfo($url);
+         echo $result;
+        
+    }
 }
