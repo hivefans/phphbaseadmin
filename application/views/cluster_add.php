@@ -1,4 +1,3 @@
-<div class="row">
 <div class="span8">
 <form class="form-horizontal">
     <legend>ZooKeeper Cluster</legend>
@@ -20,7 +19,7 @@
     </div>
 </form>
 </div>
-</div>
+
 <script>
    $("#addcluster").click(function(){
          $.ajax({
