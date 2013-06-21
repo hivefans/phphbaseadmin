@@ -87,9 +87,9 @@ function getstat()
 $("#clustersel").change(function(){
     getstat();
 })
-//setInterval(function()
-//	{
-//	  getstat();	
-//	},5000);
+setInterval(function()
+	{
+	  getstat();	
+	},5000);
 
 </script>

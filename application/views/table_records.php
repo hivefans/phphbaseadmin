@@ -343,7 +343,7 @@ function closemodal(divid)
                             { field: "timestamp", title: "timestamp",format: "{0:0}"},
                             { field: "value",title:"value"},
                             { command: ["edit","destroy"], title: "&nbsp;"}],                            
-                        editable: "inline"
+                        editable: "popup"
                     });
                      
                     function categoryDropDownEditor(container, options) {
