@@ -23,9 +23,10 @@
 	
 	<!-- start: JavaScript-->
 	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script> 
+    <script src="<?php echo $this->config->base_url();?>js/jquery.timeago.js"></script>
     <script src="<?php echo $this->config->base_url();?>js/jquery.qtip-1.0.0-rc3.min.js"></script>   
 	<script src="<?php echo $this->config->base_url();?>js/highcharts.js"></script>
-	<script src="<?php echo $this->config->base_url();?>js/highcharts-more.js"></script>
+	<script src="<?php echo $this->config->base_url();?>js/exporting.js"></script>
 	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
      

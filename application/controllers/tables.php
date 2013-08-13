@@ -131,7 +131,9 @@ class Tables extends CI_Controller
             foreach($records as $index=>$cols){            
                 foreach($cols->columns as $key=>$vals)
                  {  
-                    $row=$cols->row;                          
+                    $row=$cols->row;
+                    //$row=unpack('C*',$row);
+                    //$row=implode("",$row);                        
                     $column=explode(":",$key);                        
                     $value=$vals->value;                         
                     $value=json_encode($value);                        
@@ -142,7 +144,7 @@ class Tables extends CI_Controller
               
             $result=rtrim($result,",");
             $result= '['.$result.']';
-            echo $result; 
+            echo($result); 
         }
         else
         {

@@ -9,12 +9,14 @@ class Monitor extends CI_Controller
 	
 	public function Zookeeper()
 	{
-       	$this->load->model('hbase_table_model','monitor');
-        $this->monitor->headnav();
+       	$this->load->model('hbase_table_model','hbasetable');
+        $this->hbasetable->headnav();
         $this->load->view('div_fluid');
 		$this->load->view('div_row_fluid');
 		$this->load->view('zookeeper_admin');
-        $this->load->view('cluster_add');
+        $this->load->model('Zookeeper_model','monitor');
+        $data["clusterinfo"]=$this->monitor->getcluster();
+        $this->load->view('cluster_add',$data);
         $this->load->view('div_end');
 		$this->load->view('div_end');		
 		$this->load->view('footer');
@@ -24,9 +26,18 @@ class Monitor extends CI_Controller
         $this->load->model('Zookeeper_model','monitor');
         $clustername=$this->input->post("clustername");
         $serverlist=$this->input->post("serverlist");
-        $this->monitor->clusteradd($clustername,$serverlist);
-        echo "add cluster success";
+        $result=$this->monitor->clusteradd($clustername,$serverlist);
+        echo $result;
     }
+    
+    public function delcluster()
+    {
+        $this->load->model('Zookeeper_model','monitor');
+        $clustername=$this->input->post("clustername"); 
+        $result=$this->monitor->clusterdel($clustername);
+        echo $result;
+    }
+    
     public function Cluster_monitor()
     {
         $this->load->model('hbase_table_model','hbasetable');
@@ -41,12 +52,31 @@ class Monitor extends CI_Controller
 		$this->load->view('div_end');		
 		$this->load->view('footer');
     }
+    
+    public function Stat_trend()
+    {
+        $this->load->model('hbase_table_model','hbasetable');
+        $this->hbasetable->headnav();
+        $this->load->view('div_fluid');
+		$this->load->view('div_row_fluid');
+        $this->load->view('zookeeper_admin');
+        $this->load->model('Zookeeper_model','monitor');               
+		$this->load->view('stat_trend');        
+        $this->load->view('div_end');
+		$this->load->view('div_end');		
+		$this->load->view('footer'); 
+        
+        
+    }
+    
+    
     public function getserverinfo()
     {
         $qry=$this->input->get("qry");
         $command=$this->input->get("command");
         $server=$this->input->get("server");
         $port=$this->input->get("port");
+        $path=$this->input->get("path");
         $this->load->model('Zookeeper_model','monitor');
         $host="http://192.168.205.208:8080";
         if($qry=="stat")
@@ -98,12 +128,12 @@ class Monitor extends CI_Controller
          }
          elseif($qry=="get")
          {
-            $url=$host."/get?server=".$server."&port=".$port;
+            $url=$host."/get?server=".$server."&port=".$port."&path=".$path;
             $result=$this->monitor->getnodeinfo($url);
          }
          elseif($qry=="getchild")
          {
-            $url=$host."/getchild?server=".$server."&port=".$port;
+            $url=$host."/getchild?server=".$server."&port=".$port."&path=".$path;
             $result=$this->monitor->getnodeinfo($url);
          }       
         
@@ -118,8 +148,10 @@ class Monitor extends CI_Controller
         $this->load->view('div_fluid');
 		$this->load->view('div_row_fluid');
         $this->load->view('zookeeper_admin');
-        $this->load->model('Zookeeper_model','monitor');                
-		$this->load->view('node_stat');        
+        $this->load->model('Zookeeper_model','monitor'); 
+        $data["server"]=$this->input->get("server");
+        $data["port"]=$this->input->get("port");                    
+		$this->load->view('node_stat',$data);        
         $this->load->view('div_end');
 		$this->load->view('div_end');		
 		$this->load->view('footer');
