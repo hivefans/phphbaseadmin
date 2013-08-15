@@ -26,6 +26,17 @@
                        
                       </ul>
 				</li>
+                
+                	<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">System  <b class="caret"></b></a> 
+				   <ul class="dropdown-menu bottom-up pull-right">
+                   <li><a href="<?php echo $this->config->base_url();?>index.php/manage/userinfo">user manage</a></li> 
+                   
+            	    <li><a href="<?php echo $this->config->base_url();?>index.php/manage/logout">logout</a></li>                   
+                       
+                      </ul>
+				</li>
+                
 				</ul>
 			</div>
 		</div>

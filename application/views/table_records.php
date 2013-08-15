@@ -1,7 +1,5 @@
-<link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
-<link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
 
-<script src="<?php echo $this->config->base_url();?>js/kendo.web.min.js"></script>
+
 <script>
 
 function showmeta()
@@ -329,6 +327,7 @@ function closemodal(divid)
                       
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
+                        selectable: "multiple",
                         navigatable: true,
                         sortable: true,                                             
                         filterable:true,

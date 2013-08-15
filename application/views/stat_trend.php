@@ -35,7 +35,7 @@ $(function () {
                             connser.addPoint([x1, y1], true, true);
                             nodecountser.addPoint([x2, y2], true, true);
                             outstandser.addPoint([x3, y3], true, true);                            
-                            $.getJSON("http://192.168.205.8/phphbaseadmin/index.php/monitor/getserverinfo?qry=stat&server=192.168.205.6&port=2181&command=stat",function(data){
+                            $.getJSON("<?php echo $this->config->base_url();?>index.php/monitor/getserverinfo?qry=stat&server=192.168.205.6&port=2181&command=stat",function(data){
                                connection=parseInt(data.connection);
                                nodecount=parseInt(data.nodecount); 
                                outstand=parseInt(data.outstand);                              

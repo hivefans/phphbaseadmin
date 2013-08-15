@@ -1,0 +1,34 @@
+/* reset */
+    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+    body {padding-top:40px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+    .clearfix { *zoom: 1 }
+    .clearfix:before,
+    .clearfix:after { display: table; line-height: 0; content: ""; }
+    .clearfix:after { clear: both }
+    a {color:#368CA9;text-decoration:none}
+    a:hover {text-decoration:underline}
+    #login-wrapper {position:relative;border:1px solid #ddd;width:474px;margin:0 auto;background:#fff;padding:10px;-webkit-border-radius: 8px;-moz-border-radius: 8px;-ms-border-radius: 8px;border-radius: 8px}
+    .main-col {float:left;padding:10px 0;position:relative;margin-left:120px;padding-left:40px;border-left:1px solid #ddd}
+    .logo_img {width:64px;position:absolute;top:50%;margin:-32px 0 0 -136px}
+    .main-col .heading_main {font-family:"Open Sans Condensed",sans-serif;font-size:22px;margin-bottom:20px}
+    .main-col label {display:block;font-size:12px;margin-bottom:4px;color:#888}
+    .main-col input[type="text"],.main-col input[type="password"] {width:240px;display:block;font-size:13px;padding:6px 4px;background-color: #fff;border: 1px solid #ccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);color:#555;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;margin-bottom:16px;-webkit-transition: all 0.2s linear;-moz-transition: all 0.2s linear;-ms-transition: all 0.2s linear;-o-transition: all 0.2s linear;transition: all 0.2s linear}
+    .main-col input[type="text"]:focus,input[type="password"]:focus{border-color: #5ca9e4;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0 0 2px rgba(70, 161, 231, 0.3)}
+    .main-col label.checkbox {margin-top:-6px;position:relative;color:#333}
+    input[type="checkbox"] {margin:0 4px 0 0;margin-top: 1px \9;*margin-top: 0;line-height: normal;cursor: pointer;vertical-align:-2px}
+    .btn {display: inline-block; *display: inline; padding: 4px 14px; margin-bottom: 0; *margin-left: .3em; font-size: 14px; line-height: 20px; *line-height: 20px; color: #333333; text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; cursor: pointer; background-color: #f5f5f5; *background-color: #e6e6e6; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(to bottom, #ffffff, #e6e6e6); background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; border: 1px solid #bbbbbb; *border: 0; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border-color: #e6e6e6 #e6e6e6 #bfbfbf; border-bottom-color: #a2a2a2; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0); filter: progid:dximagetransform.microsoft.gradient(enabled=false); *zoom: 1; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);}
+    .btn:hover {color: #333333; text-decoration: none; background-color: #e6e6e6; *background-color: #d9d9d9; /* Buttons in IE7 don't get borders, so darken on hover */ background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear}
+    .btn-beoro-3 { text-shadow: 0px -1px 0px #004573; color: #fff; background-color: #006391; background-image: -moz-linear-gradient(top, #1e81af, #004573); background-image: -ms-linear-gradient(top, #1e81af, #004573); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1e81af), to(#004573)); background-image: -webkit-linear-gradient(top, #1e81af, #004573); background-image: -o-linear-gradient(top, #1e81af, #004573); background-image: linear-gradient(top, #1e81af, #004573); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e81af', endColorstr='#004573', GradientType=0); border-color: #006391 #004573 #004573 #006391; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+    .btn-beoro-3:hover, .btn-beoro-3:active, .btn-beoro-3.active, .btn-beoro-3.disabled, .btn-beoro-3[disabled] { background-color: #004573; }
+    .btn-beoro-3:hover { color: #fff; text-shadow: 0px -1px 0px #002755; }
+    .btn-beoro-3.active, .btn-beoro-3:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #fff; }
+    .submit_sect {text-align:center;padding-top:18px}
+    .main-col label.error {font-weight:700;color:#b94a48;margin:-10px 0 10px 0;display:block}
+    .main-col label.error + label.checkbox {margin-top:4px}
+    .login_links {position:absolute;bottom:-30px;left:0;text-align:center;font-size:12px;width:100%}
+    
+    @media (max-width: 767px) {
+        #login-wrapper {width:auto}
+        .main-col {margin-left:0;border:none;padding:10px}
+        .logo_img {display:none}
+    }
