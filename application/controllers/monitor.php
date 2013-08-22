@@ -27,19 +27,25 @@ class Monitor extends CI_Controller
 	}
     public function Addcluster()
     {
-        $this->load->model('Zookeeper_model','monitor');
-        $clustername=$this->input->post("clustername");
-        $serverlist=$this->input->post("serverlist");
-        $result=$this->monitor->clusteradd($clustername,$serverlist);
+        if($this->session->userdata('grant')=='admin'){
+            $this->load->model('Zookeeper_model','monitor');
+            $clustername=$this->input->post("clustername");
+            $serverlist=$this->input->post("serverlist");
+            $result=$this->monitor->clusteradd($clustername,$serverlist);
+         }
+         else $result="sorry,No authority!";   
         echo $result;
     }
     
     public function delcluster()
     {
+      if($this->session->userdata('grant')=='admin'){  
         $this->load->model('Zookeeper_model','monitor');
         $clustername=$this->input->post("clustername"); 
         $result=$this->monitor->clusterdel($clustername);
-        echo $result;
+       }
+       else $result="sorry,No authority!"; 
+       echo $result;
     }
     
     public function Cluster_monitor()
@@ -68,8 +74,7 @@ class Monitor extends CI_Controller
 		$this->load->view('stat_trend');        
         $this->load->view('div_end');
 		$this->load->view('div_end');		
-		$this->load->view('footer'); 
-        
+		$this->load->view('footer');
         
     }
     
@@ -82,11 +87,17 @@ class Monitor extends CI_Controller
         $port=$this->input->get("port");
         $path=$this->input->get("path");
         $this->load->model('Zookeeper_model','monitor');
-        $host="http://192.168.205.208:8080";
+        $host="http://".$this->config->item('cherrypy_host').":".$this->config->item('cherrypy_port');;
         if($qry=="stat")
          {
-           $url=$host."/stat?server=".$server."&port=".$port."&command=".$command;
-           $str=$this->monitor->getnodeinfo($url);
+           $staturl=$host."/stat?server=".$server."&port=".$port."&command=".$command;
+           $wchsurl=$host."/stat?server=".$server."&port=".$port."&command=wchs";
+           $str=$this->monitor->getnodeinfo($staturl);
+           $wchs_str=$this->monitor->getnodeinfo($wchsurl);
+           if(preg_match("/watches:(\S+)/i",$wchs_str,$wchsarr))
+           {
+              $watches=$wchsarr[1];                    
+            }
            if($command=="stat")
             {                
                 if(preg_match("/Mode: (\S+)/i",$str,$modestr))
@@ -121,8 +132,9 @@ class Monitor extends CI_Controller
                 {
                     $latency=$latencystr[1];                    
                 }
+                
                 $result='{"mode":"'.$mode.'","nodecount":"'.$nodecount.'","connection":"'.$connection.'","outstand":"'.$outstanding.'",';
-                $result.='"sent":"'.$sent.'","zxid":"'.$zxid.'","received":"'.$received.'","latency":"'.$latency.'"}';
+                $result.='"sent":"'.$sent.'","zxid":"'.$zxid.'","received":"'.$received.'","latency":"'.$latency.'","watches":"'.$watches.'"}';
                 
             }
             else

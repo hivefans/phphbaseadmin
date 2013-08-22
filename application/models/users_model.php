@@ -15,7 +15,7 @@ class Users_model extends CI_Model {
 		$query = $this->db->get('member');		
 		if($query->num_rows == 1)
 		{
-			return true;
+			return $query->result_array();
 		}		
 	}
 
@@ -46,26 +46,55 @@ class Users_model extends CI_Model {
 	{
 
 		$this->db->where('user_name', $this->input->post('username'));
-		$query = $this->db->get('membership');
-
+		$query = $this->db->get('member');
         if($query->num_rows > 0){
-        	echo '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>';
-			  echo "Username already taken";	
-			echo '</strong></div>';
+            $result=false;
 		}else{
 
 			$new_member_insert_data = array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'email_addres' => $this->input->post('email_address'),			
 				'user_name' => $this->input->post('username'),
+				'group' => $this->input->post('groupname'),
+				'email_address' => $this->input->post('email'),			
+				'grant' => $this->input->post('grant'),
 				'pass_word' => md5($this->input->post('password'))						
 			);
-			$insert = $this->db->insert('membership', $new_member_insert_data);
-		    return $insert;
+			$result = $this->db->insert('member', $new_member_insert_data);
+		    
 		}
-	      
+	    return $result;  
 	}//create_member
+    
+    function update_member($id)
+	{
+	   $password=$this->input->post('password');
+	    if($password=="")
+         {
+            $updatepass=$this->input->post('password2');
+         }
+         else
+         {
+            $updatepass=md5($this->input->post('password'));
+         }
+    	$member_update_data = array(
+				'user_name' => $this->input->post('username'),
+				'group' => $this->input->post('groupname'),
+				'email_address' => $this->input->post('email'),			
+				'grant' => $this->input->post('grant'),
+				'pass_word' => $updatepass						
+			);
+		
+        $this->db->where('id', $id);
+		$this->db->update('member', $member_update_data);
+		$report = array();
+		$report['error'] = $this->db->_error_number();
+		$report['message'] = $this->db->_error_message();
+		if($report !== 0){
+			return true;
+		}else{
+			return false;
+		}
+	     
+	}
     
     
     /**
@@ -80,12 +109,26 @@ class Users_model extends CI_Model {
 	   return $query->result_array();
     }
     
-     function get_users()
+     function get_users($id = FALSE)
     {
-       $this->db->select('*');
-	   $this->db->from('member'); 
-       $query = $this->db->get();		
+       if($id==FALSE)
+       {
+          $this->db->select('*');
+	      $this->db->from('member'); 
+          $query = $this->db->get();	
+       }
+       else
+       {
+          $query = $this->db->get_where('member', array('id' => $id));
+       }
 	   return $query->result_array();
-    }
+    } 
+    
+    function delete_user($id)
+    {
+       $this->db->where('id', $id);
+	   $this->db->delete('member'); 
+    }   
+  
     
 }

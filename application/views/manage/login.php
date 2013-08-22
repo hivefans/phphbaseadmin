@@ -6,11 +6,13 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
     <title>PhpHbaseAdmin - Login</title>
     <link rel="stylesheet" href="<?php echo $this->config->base_url();?>css/login.css">
+    <link id="bootstrap-style" href="<?php echo $this->config->base_url();?>css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet'>
     <!-- jQuery framework -->
         <script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
     <!-- validation -->
         <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script>
+        <script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>
     <script type="text/javascript">
         (function(a){a.fn.vAlign=function(){return this.each(function(){var b=a(this).height(),c=a(this).outerHeight(),b=(b+(c-b))/2;a(this).css("margin-top","-"+b+"px");a(this).css("top","50%");a(this).css("position","absolute")})}})(jQuery);(function(a){a.fn.hAlign=function(){return this.each(function(){var b=a(this).width(),c=a(this).outerWidth(),b=(b+(c-b))/2;a(this).css("margin-left","-"+b+"px");a(this).css("left","50%");a(this).css("position","absolute")})}})(jQuery);
         $(document).ready(function() {
@@ -22,8 +24,8 @@
                     onkeyup: false,
                     errorClass: 'error',
                     rules: {
-                        login_name: { required: true },
-                        login_password: { required: true }
+                        user_name: { required: true },
+                        password: { required: true }
                     }
                 })
             }
@@ -56,6 +58,14 @@
                     <input type="text" id="user_name" name="user_name" value="" />
                     <label for="login_password">Password</label>
                     <input type="password" id="password" name="password" value="" />
+                    <?php
+                        if(isset($message_error) && $message_error){
+                            echo '<div class="alert alert-error">';
+                            echo '<a class="close" data-dismiss="alert">×</a>';
+                            echo '<strong>username or password is wrong!</strong>';
+                            echo '</div>';             
+                        }
+                     ?>
                    <!-- <label for="login_remember" class="checkbox"><input type="checkbox" id="login_remember" name="login_remember" /> Remember me</label>-->
                     <div class="submit_sect">
                         <button type="submit" class="btn btn-beoro-3">Login</button>

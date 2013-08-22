@@ -27,7 +27,7 @@
                 echo '<td>'.$row['user_name'].'</td>';
                 echo '<td>'.$row['group'].'</td>';
                 echo '<td>'.$row['email_address'].'</td>';
-                echo '<td>'.$row['grant'].'</td>';                
+                echo '<td class="grant"><a href="#" title="'.$row['grant'].'">'.$row['grant'].'</td>';                
                 echo '<td class="crud-actions">
                   <a href="'.site_url("manage").'/edit/'.$row['id'].'" class="btn btn-info">view & edit</a>  
                   <a href="'.site_url("manage").'/delete/'.$row['id'].'" class="btn btn-danger">delete</a>
@@ -39,3 +39,11 @@
 	</table>
 	
 </div>  
+<script>
+$(".grant").each(function(){
+  if($(this).text().length>=50)
+    {
+      $(this).html("<a href='#' title='"+$(this).text()+"'>"+$(this).text().substr(0,50)+"...</a>");  
+    }
+});
+</script>

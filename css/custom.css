@@ -99,3 +99,7 @@ table.default td {
    float:right;
    padding-right: 12px;
 }
+
+#tablenames tr td{
+    width:400px;
+}

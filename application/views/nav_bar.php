@@ -26,12 +26,15 @@
                        
                       </ul>
 				</li>
-                
+               
                 	<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">System  <b class="caret"></b></a> 
 				   <ul class="dropdown-menu bottom-up pull-right">
+                    <?php
+                   if($this->session->userdata('group')=='admin'){
+                    ?>
                    <li><a href="<?php echo $this->config->base_url();?>index.php/manage/userinfo">user manage</a></li> 
-                   
+                   <?php }?>
             	    <li><a href="<?php echo $this->config->base_url();?>index.php/manage/logout">logout</a></li>                   
                        
                       </ul>
@@ -48,16 +51,38 @@
 <script>
 function showaddtable()
 {
+   <?php
+     if($this->session->userdata('group')=='admin')
+      {
+   ?> 
    $('#addtablediv').modal({
          backdrop:true
-      }) 
+      })
+    <?php
+      }
+      else
+      {
+         echo 'alert("sorry,No authority!")';
+      }    
+    ?> 
 }
 function showdeltable()
 {
+    <?php
+     if($this->session->userdata('group')=='admin')
+      {
+   ?>  
    $('#deltabdiv').modal({
          backdrop:true
       });
-   $('#chkAll').attr("checked",false); 
+   $('#chkAll').attr("checked",false);
+    <?php
+      }
+      else
+      {
+         echo 'alert("sorry,No authority!")';
+      }    
+    ?>  
 }
 
 $(function() {   
@@ -124,7 +149,9 @@ $(function() {
                    location.reload();
                 }                 
            }
-     });    
+     });     
+     
+  
      
 }); 
 
@@ -262,7 +289,7 @@ function ConfirmDropTables()
 <div class="modal hide" id="deltabdiv">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>delete table</h3>
+    <h3>drop table</h3>
   </div>
   <div class="modal-body">
     <table id="tbnames" class="table table-hover table-bordered">
@@ -277,7 +304,7 @@ function ConfirmDropTables()
     </table>
   </div>
   <div class="modal-footer">    
-    <a href="#" id="delall" class="btn btn-danger" onclick="ConfirmDropTables();">delete</a>
+    <a href="#" id="delall" class="btn btn-danger" onclick="ConfirmDropTables();">drop</a>
     <a href="#" class="btn" data-dismiss="modal">close</a>
   </div>
 </div>

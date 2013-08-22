@@ -38,11 +38,13 @@ class Manage extends CI_Controller
 
 		$is_valid = $this->users_model->validate($user_name, $password);
 		
-		if($is_valid)
+		if(count($is_valid)>0)
 		{
 			$data = array(
 				'user_name' => $user_name,
-				'is_logged_in' => true
+				'is_logged_in' => true,
+                'group'=>$is_valid[0]["group"],
+                'grant'=>$is_valid[0]["grant"]
 			);
 			$this->session->set_userdata($data);
 			redirect('tables');
@@ -71,8 +73,7 @@ class Manage extends CI_Controller
     {
       $this->load->model('hbase_table_model','table');
       $this->table->headnav();  
-      $this->load->model('users_model');  
-      $data['usergroup'] = $this->users_model->get_usergroup();  
+      $this->load->model('users_model');
       $data['users'] = $this->users_model->get_users();  
       $this->load->view('manage/userinfo',$data);  
       $this->load->view('footer');
@@ -81,12 +82,80 @@ class Manage extends CI_Controller
     function adduser()
     {
       $this->load->model('hbase_table_model','table');
-      $this->table->headnav();  
+      $this->table->headnav();
+      $tables=$this->table->get_table_names();
+      $result='';
+       foreach($tables as $key=>$tablename)
+       {
+          $result.='{id:"'.($key).'",name:"'.$tablename.'"},';
+       }
+       $data['result']=$result;
       $this->load->model('users_model');  
-      $data['usergroup'] = $this->users_model->get_usergroup();  
-      $data['users'] = $this->users_model->get_users();  
+      $data['usergroup'] = $this->users_model->get_usergroup();       
+      
+      if ($this->input->server('REQUEST_METHOD') === 'POST')
+        {           
+           $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
+           $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+           $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]'); 
+           $this->form_validation->set_rules('grant', 'Grant', 'trim|required');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           if ($this->form_validation->run())
+            {
+                if($this->users_model->create_member()){
+                    $data['flash_message'] = TRUE; 
+                }else{
+                    $data['flash_message'] = FALSE; 
+                }
+            }
+        }
       $this->load->view('manage/adduser',$data);  
       $this->load->view('footer');  
+       
+    }
+    
+    function edit($id)
+    {
+       $this->load->model('hbase_table_model','table');
+      $this->table->headnav();
+      $tables=$this->table->get_table_names();
+      $result='';
+       foreach($tables as $key=>$tablename)
+       {
+          $result.='{id:"'.($key).'",name:"'.$tablename.'"},';
+       }
+       $data['result']=$result;
+      $this->load->model('users_model');  
+      $data['usergroup'] = $this->users_model->get_usergroup();
+      $data['userinfo']=$this->users_model->get_users($id); 
+       if ($this->input->server('REQUEST_METHOD') === 'POST')
+        {           
+           $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
+           $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');            
+           $this->form_validation->set_rules('grant', 'Grant', 'trim|required');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           if ($this->form_validation->run())
+            {
+                if($this->users_model->update_member($id)){
+                    $data['flash_message'] = TRUE; 
+                    redirect('manage/edit/'.$id);
+                }else{
+                    $data['flash_message'] = FALSE; 
+                }
+            }
+        }
+      
+      $this->load->view('manage/edituser',$data);  
+      $this->load->view('footer');
+    }
+    
+    function delete($id)
+    {
+       $this->load->model('users_model'); 
+       $this->users_model->delete_user($id); 
+       echo "<script>alert('delete user success');</script>";
+        redirect('manage/userinfo');
+        
     }
     
     

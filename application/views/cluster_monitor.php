@@ -10,11 +10,11 @@
         <tr>
           <th>Node IP</th>
           <th>Online</th>
-          <th>Mode</th>
+          <th>Role</th>
+          <th>Watches</th>
           <th>connections</th>
           <th>sent</th>
-          <th>received</th>
-          <th>outstanding</th>
+          <th>received</th>         
           <th>Node count</th>
           <th>zxid</th>
           <th>Latency</th>
@@ -94,8 +94,8 @@ function getstat()
                    type:"GET",
                    success:function(msg){ 
                       var result=eval ("(" + msg + ")");
-                      serverstat="<td>"+result.mode+"</td><td>"+result.connection+"</td><td>"+result.sent+"</td><td>"+result.received;
-                      serverstat+="</td><td>"+result.outstand+"</td><td>"+result.nodecount+"</td><td>"+result.zxid+"</td><td>"+result.latency+"</td>";
+                      serverstat="<td>"+result.mode+"</td><td>"+result.watches+"</td><td>"+result.connection+"</td><td>"+result.sent+"</td><td>"+result.received;
+                      serverstat+="</td><td>"+result.nodecount+"</td><td>"+result.zxid+"</td><td>"+result.latency+"</td>";
                       
                     }   
                 });

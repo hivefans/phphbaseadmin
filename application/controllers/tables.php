@@ -47,41 +47,45 @@ class Tables extends CI_Controller
 	}
 	
 	public function TableList()
-	{
-		$this->load->model('hbase_table_model', 'table');
-		$table_list = $this->table->get_table_names();
-		$table_list = array('table_names' => $table_list);
+	{		
+        $grant_tables=$this->session->userdata('grant');
+        $grant_arr=explode(",",$grant_tables);
+        sort($grant_arr);
+		$table_list = array('table_names' => $grant_arr);
 		echo json_encode($table_list);
 	}
 	
     public function AddTable()
 	{
-	    $tablename=$this->input->post("tablename");        
-        if(strlen($this->GetTableRegions($tablename))==2)
-        {
-            $column=$this->input->post("column");
-            $maxversions=$this->input->post("maxversions");
-            $compression=$this->input->post("compression");
-            $columnarr=explode(",",$column);
-            $maxversionsarr=explode(",",$maxversions);
-            $compressionarr=explode(",",$compression);
-             $columns=array();
-            $this->load->model('hbase_table_model', 'table');        
-            foreach($columnarr as $index=>$val)
-             {
-                $coldes=new ColumnDescriptor();
-                $coldes->name=$val.":";
-                $coldes->maxVersions=(int)$maxversionsarr[$index];
-                $coldes->compression=$compressionarr[$index];
-                array_push($columns,$coldes);                        
-             }
-    	    
-    		$result = $this->table->create_table($tablename,$columns);
+       if($this->session->userdata('grant')=='admin'){
+    	    $tablename=$this->input->post("tablename");        
+            if(strlen($this->GetTableRegions($tablename))==2)
+            {
+                $column=$this->input->post("column");
+                $maxversions=$this->input->post("maxversions");
+                $compression=$this->input->post("compression");
+                $columnarr=explode(",",$column);
+                $maxversionsarr=explode(",",$maxversions);
+                $compressionarr=explode(",",$compression);
+                 $columns=array();
+                $this->load->model('hbase_table_model', 'table');        
+                foreach($columnarr as $index=>$val)
+                 {
+                    $coldes=new ColumnDescriptor();
+                    $coldes->name=$val.":";
+                    $coldes->maxVersions=(int)$maxversionsarr[$index];
+                    $coldes->compression=$compressionarr[$index];
+                    array_push($columns,$coldes);                        
+                 }
+        	    
+        		$result = $this->table->create_table($tablename,$columns);
+            }
+            else
+            {
+                $result="table already exsits";
+            }
         }
-        else
-        {
-            $result="table already exsits";
-        }		
+        else $result="sorry,No authority!";		
 		echo($result);
 	}
     
@@ -306,13 +310,17 @@ class Tables extends CI_Controller
     
     public function DelAllTable()
     {
-       $tables=$this->input->post("tables");
-       $tablesarr=explode(";",$tables);
-       foreach($tablesarr as $tablename)
-        {
-           $this->DelTable($tablename); 
-        }
-       echo "tables deleted success";
+       if($this->session->userdata('grant')=='admin'){ 
+           $tables=$this->input->post("tables");
+           $tablesarr=explode(";",$tables);
+           foreach($tablesarr as $tablename)
+            {
+               $this->DelTable($tablename); 
+            }
+            
+           echo "tables deleted success";
+       }
+       else echo "sorry,No authority!";
         
     }
 }
