@@ -5,15 +5,16 @@ phphbaseadmin is a hbase admin web tool,it developed using thrift interface、ph
 
 Main features：
 --------------
+       user grant manage
        view table record 
-       create table <br>
-       batch delete tables<br>
-       show table metadata<br>
-       search table record<br>
-       truncate table record<br>
-       delete table   <br>
-       update record<br>
-       delete record<br>
+       create table
+       batch delete tables
+       search table record
+       truncate table record
+       delete table   
+       update record
+       delete record
+       monitor zookeeper
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/login.png)
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/main.png)   
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/createtable.png) 
