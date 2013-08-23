@@ -5,7 +5,7 @@ phphbaseadmin is a hbase admin web tool,it developed using thrift interface、ph
 
 Main features：
 --------------
-       view table record <br>
+       view table record 
        create table <br>
        batch delete tables<br>
        show table metadata<br>
