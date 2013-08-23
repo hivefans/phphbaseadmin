@@ -34,11 +34,11 @@ Install:
 <br>
 (6) if you use zookeeper monitor,please install cherry frame,then run cherrypy/cherry.py
 <br>
-# tar zxvf cherrypy/CherryPy-3.2.2.tar.gz
+ tar zxvf cherrypy/CherryPy-3.2.2.tar.gz
 <br>
-# cd cherrypy/CherryPy-3.2.2
+cd cherrypy/CherryPy-3.2.2
 <br>
-# python setup.py install
+ python setup.py install
 <br>
 run cherrypy/cherrypy.py
 <br>
