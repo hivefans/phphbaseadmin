@@ -27,7 +27,7 @@ class Monitor extends CI_Controller
 	}
     public function Addcluster()
     {
-        if($this->session->userdata('grant')=='admin'){
+        if($this->session->userdata('group')=='admin'){
             $this->load->model('Zookeeper_model','monitor');
             $clustername=$this->input->post("clustername");
             $serverlist=$this->input->post("serverlist");
@@ -39,7 +39,7 @@ class Monitor extends CI_Controller
     
     public function delcluster()
     {
-      if($this->session->userdata('grant')=='admin'){  
+      if($this->session->userdata('group')=='admin'){  
         $this->load->model('Zookeeper_model','monitor');
         $clustername=$this->input->post("clustername"); 
         $result=$this->monitor->clusterdel($clustername);

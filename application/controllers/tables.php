@@ -57,7 +57,7 @@ class Tables extends CI_Controller
 	
     public function AddTable()
 	{
-       if($this->session->userdata('grant')=='admin'){
+       if($this->session->userdata('group')=='admin'){
     	    $tablename=$this->input->post("tablename");        
             if(strlen($this->GetTableRegions($tablename))==2)
             {
@@ -310,7 +310,7 @@ class Tables extends CI_Controller
     
     public function DelAllTable()
     {
-       if($this->session->userdata('grant')=='admin'){ 
+       if($this->session->userdata('group')=='admin'){ 
            $tables=$this->input->post("tables");
            $tablesarr=explode(";",$tables);
            foreach($tablesarr as $tablename)

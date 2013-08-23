@@ -138,7 +138,7 @@ class Manage extends CI_Controller
             {
                 if($this->users_model->update_member($id)){
                     $data['flash_message'] = TRUE; 
-                    redirect('manage/edit/'.$id);
+                   // redirect('manage/edit/'.$id);
                 }else{
                     $data['flash_message'] = FALSE; 
                 }

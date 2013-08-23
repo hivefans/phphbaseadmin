@@ -85,6 +85,17 @@ class Users_model extends CI_Model {
 		
         $this->db->where('id', $id);
 		$this->db->update('member', $member_update_data);
+        if($this->input->post('username')==$this->session->userdata('user_name'))
+          {
+             $data = array(
+				'user_name' => $this->input->post('username'),
+				'is_logged_in' => true,
+                'group'=>$this->input->post('groupname'),
+                'grant'=>$this->input->post('grant')
+			);
+            $this->session->set_userdata($data);
+          }
+                
 		$report = array();
 		$report['error'] = $this->db->_error_number();
 		$report['message'] = $this->db->_error_message();
