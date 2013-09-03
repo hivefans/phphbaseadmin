@@ -2,4 +2,104 @@
    margin-left: 120px;
    margin-bottom: 20px;
 }
+#content {
+    background-color: #FFFFFF;
+    border: 1px solid #BEBEBE;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    min-height: 100px;
+    padding-bottom: 7px;
+    position: relative;
+}
+.container_12 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1020px;
+}
 
+html, body, div, img, form, table, tbody, thead, tr, th, td {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+#title {
+    background: -moz-linear-gradient(-90deg, #FFFFFF, #EDEDED) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #D5D5D5;
+    height: 35px;
+}
+
+#title-header {
+    color: #4A4A4A;
+    font-size: 1.3em;
+    font-variant: normal;
+    font-weight: bold;
+    height: 35px;
+    letter-spacing: -1px;
+    line-height: 37px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.grid_6 {   
+    float:left;
+    margin-left: 10px;
+    margin-right: 10px;    
+}
+
+#sensors {
+    display: block;
+    padding: 10px 10px 5px;
+    position: relative;
+}
+.boxit {
+    float: none;
+}
+
+table.default {
+    border: 5px solid #F3F3F3;
+    width: 100%;
+}
+
+table.default tr th:first-child {
+    border-left: 1px solid #CDCDCD;
+}
+table.default th {
+    background: -moz-linear-gradient(center top , #EAEAEA 0px, #DDDDDD 100%) repeat scroll 0 0 transparent;
+    border-top: 1px solid #CDCDCD;
+}
+table.default th {
+    border-bottom: 1px solid #BABABA;
+    color: #3F3F3F;
+    font-size: 0.9em;
+    font-variant: normal;
+    font-weight: bold;
+    height: 20px;
+    line-height: 25px;
+    padding-left: 10px;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+table.default td {    
+    border-bottom: 1px solid #CDCDCD;
+    color: #474747;
+    height: 30px;
+    line-height: 30px;
+    overflow: visible;
+    padding-left: 10px;
+}
+
+.rightgrid{   
+   float:right;
+   padding-right: 12px;
+}
+
+#tablenames tr td{
+    width:400px;
+}

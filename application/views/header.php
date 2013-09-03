@@ -13,23 +13,24 @@
 	<!-- end: Mobile Specific -->
 
 	<!-- start: CSS -->
-    <link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
-    <link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
-    <link href="<?php echo $this->config->base_url();?>css/custom.css" rel="stylesheet">
+    
+    <link href="<?php echo $this->config->base_url();?>css/custom.css" rel="stylesheet">  
+     
 	<link id="bootstrap-style" href="<?php echo $this->config->base_url();?>css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo $this->config->base_url();?>css/bootstrap-responsive.min.css" rel="stylesheet">
-   
+    <link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
+    <link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
 	<!-- end: CSS -->
 	
-	<!-- start: JavaScript-->
-	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script> 
-    <script src="<?php echo $this->config->base_url();?>js/jquery.qtip-1.0.0-rc3.min.js"></script>   
+	<!-- start: JavaScript -->
+	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
+     
 	<script src="<?php echo $this->config->base_url();?>js/highcharts.js"></script>
-	<script src="<?php echo $this->config->base_url();?>js/highcharts-more.js"></script>
+	<script src="<?php echo $this->config->base_url();?>js/exporting.js"></script>
 	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
-     
-    
+    <script src="<?php echo $this->config->base_url();?>js/kendo.web.min.js"></script>     
+     <script src="<?php echo $this->config->base_url();?>js/jquery.mulitselector.js"></script>  
 	<!-- end: JavaScript-->
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -39,8 +40,8 @@
 
 	<!-- start: Favicon -->
 	<link rel="shortcut icon" href="<?php echo $this->config->base_url();?>favicon.ico">
-	<!-- end: Favicon -->
-                
+	<!-- end: Favicon -->  
+              
 </head>
 
 <body>

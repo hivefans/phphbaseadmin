@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "tables";
+$route['default_controller'] = "manage";
 $route['404_override'] = '';
 
 

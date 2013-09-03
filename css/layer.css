@@ -1,0 +1,336 @@
+body, div, p, input, ul, ol, li, h1, h2, h3, h4, h5, h6, a, td {
+	padding:0;
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif
+}
+body {
+	font-size:12px;
+	background:#fff;
+	color:#000
+}
+h1, h2, h3, h4, h5, h6, select, input, td {
+	font-size:12px
+}
+img {
+	border:0
+}
+ul, ol, li {
+	List-style-type:none
+}
+a {
+	color:#7a4ea7;
+	text-decoration:none
+}
+a:hover {
+	color:#f00;
+	text-decoration:none
+}
+.wrap {
+	width:945px;
+	margin:0 0 0 20px
+}
+.wrap .inp_sel {
+	width:20px;
+	height:20px;
+	cursor:pointer;
+	vertical-align:top;
+	*vertical-align:auto;
+	margin:0 auto;
+	border:0;
+	background:url(../img/tubiao.gif) no-repeat left -119px
+}
+.wrap .inp_txt {
+	margin:auto;
+	*margin:-1px 0 0 -5px;
+	cursor:pointer;
+	line-height:20px;/* FF */
+	height:20px;
+	*height:18px;
+	_height:20px;
+	border:1px solid #abb0ac;
+	border-right:0;
+	text-indent:5px
+}
+.wrap .inp_wid1 {
+	width:200px
+}
+.col_b {
+	color:#646464
+}
+a.butn3 {
+	width:15px;
+	height:15px;
+	margin:5px 9px 0 0;
+	background:url(../img/tb.gif) no-repeat left -327px
+}
+a.butn3:hover {
+	background-position:left -297px
+}
+
+.btn_fst {
+	cursor:default
+}
+.btn_fst input {
+	width:73px;
+	height:24px;
+	padding:3px 0 6px;
+*padding:3px 0 0;
+	line-height:20px;
+	background:url(../img/btn_fst.gif) no-repeat;
+	border:0
+}
+.btn_fst input:hover {
+	background-position:0 -48px
+}
+.btn_fst input.fst:hover {
+	background-position:0 -48px
+}
+.btn_fst input.fst {
+	background-position:0 -24px
+}
+.btn_fst input.butdef_n {
+	color:#aca899;
+	background:url(../img/btn_fst.gif) no-repeat 0 -72px
+}
+.btn_fst input.butdef_n:hover {
+	background-position:0 -72px
+}
+
+.alert_div {
+	position:absolute;
+	z-index:160;
+	background:#3d62a6 url(../img/laybj.gif) repeat-x left top
+}
+.alert_div h1 {
+	height:26px;
+	font-size:12px;
+	line-height:26px;
+	color:#fff;
+	font-weight:normal;
+	padding:2px 0 0 15px;
+	clear:both
+}
+.alert_div h1 span {
+	float:left
+}
+.alert_div h1 a {
+	float:right
+}
+.alert_div h1 img {
+	_margin:7px 0 0
+}
+.alert_div label {
+	border:0;
+	width:100%;
+	float:none;
+	text-align:left;
+	padding:0;
+	margin:0
+}
+.alert_div ol {
+	list-style-type:none
+}
+a.gray {
+	color:#ccc
+}
+a.gray:hover {
+	color:#ccc
+}
+
+
+
+
+
+
+
+
+.sech_layt {
+	padding:3px 3px 0;
+	border:1px solid #8cb2d6;
+	border-bottom:0;
+	margin:0 1px;
+	background:#e4ecf3
+}
+.sech_layb {
+	float:left;
+*float:none;
+	padding:9px 9px 10px;
+	border:1px solid #8cb2d6;
+	border-top:0;
+	margin:0 1px 1px;
+	background:#fff
+}
+.sech_div {
+	background:none
+}
+.sech_div .blk {
+	background:#3d62a6;
+	float:left
+}
+.sech_div h1 {
+	background:#3d62a6 url(../img/laybj.gif) repeat-x left top
+}
+.sech_div ol, .sech_lay2 ol {
+	height:auto;
+	_height:20px;
+	min-height:20px
+}
+.sech_div h2 {
+	background:#fff;
+	border-top:0;
+	float:none;
+	height:auto;
+	padding:6px 0 0;
+	margin:0
+}
+.sech_div h3 {
+	height:1px;
+}
+.sech_div h3 span {
+	float:left;
+	line-height:30px
+}
+.sech_div h3 b {
+	float:right
+}
+.sech_div h3 b input {
+	font-weight:normal;
+	margin:1px 0 0 6px
+}
+.sech_div p {
+	line-height:150%;
+	clear:both;
+	padding:2px 3px 9px 10px;
+	margin:8px 0 0
+}
+.sech_lay2 {
+	background:#fff
+}
+.sech_lay2 .box {
+	padding:6px 10px 7px 6px
+}
+.sech_lay2 li {
+	cursor:default
+}
+.sech_lay2 li a, .sech_lay2 li a label {
+	color:#000;
+	cursor:default;
+	font-family:"宋体";
+}
+.sech_div li a, .sech_div li a label {
+	color:#000;
+	cursor:pointer;
+	font-family:"宋体"
+}
+.sech_layb a, .sech_lay2 a, .sech_div label {
+	display:block
+}
+.sech_div li a:hover, .sech_lay2 li a:hover {
+	color:#000
+}
+.sech_div ul {
+	padding:10px 0 7px
+}
+.sech_div ul li {
+	text-indent:5px;
+	_text-indent:3px;
+	height:20px;
+	line-height:20px
+}
+.sech_div ul li a {
+	_width:auto;
+	_height:16px;
+	_line-height:16px;
+	padding:2px 20px 0 4px;
+	_padding:2px 20px 0 2px;
+	border:1px solid #e5ecf4;
+	background:url(../img/tb.gif) no-repeat;
+	background-position:right -14px;
+	*background-position:right -13px
+}
+.sech_div ul li a:hover {
+	color:#000;
+	border:1px solid #3f557c;
+	background-position:right -146px;
+	*background-position:right -145px
+}
+.sech_div ol li input {
+	vertical-align:middle;
+	margin-bottom:1px
+}
+.sech_div ol li:hover {
+	background:#e4ecf3
+}
+.sech_div ol li a:hover {
+	_background:#e4ecf3
+}
+.sech_div ol input {
+	cursor:default
+}
+
+.sech_lay2 ol li:hover {
+	background:#e4ecf3;
+	cursor:default
+}
+.sech_lay2 ol li a:hover {
+	_background:#e4ecf3;
+	cursor:default
+}
+.sech_lay2 ol li a:hover label {
+	_background:#e4ecf3
+}
+.sech_lay2 ol li input {
+	cursor:default
+}
+.ms_width ul, .lay_wl ul, .lay_wl2 ul, .lay_wms ul {
+	height:auto;
+	_height:70px;
+	min-height:60px
+}
+.ms_width {
+	width:746px
+}
+.ms_width li {
+	width:240px;
+	float:left
+}
+.sech_div .layshow {
+	background:#e4ecf3 url(../img/tb.gif) no-repeat 96% -55px
+}
+.sech_div .layicon {
+	background:#cbf0fd url(../img/tb.gif) no-repeat 96% -55px
+}
+.sech_div .layon, .sech_lay2 .layon {
+	background:#cbf0fd
+}
+.sech_div .layon:hover, .sech_lay2 .layon:hover {
+	background:#e4ecf3
+}
+.sech_div .layon a, .sech_lay2 .layon a {
+	background:#cbf0fd
+}
+.sech_div .layon a:hover, .sech_lay2 .layon a:hover {
+	background:#e4ecf3
+}
+.sech_div .nonelay {
+	background:#fff;
+	cursor:default
+}
+.sech_div .nonelay a {
+	background:#fff;
+	cursor:default
+}
+.sech_div .nonelay:hover {
+	background:#e4ecf3
+}
+.sech_div .nonelay a:hover {
+	background:#e4ecf3
+}
+.col_b {
+	color:#646464
+}
+
+
+
+
+

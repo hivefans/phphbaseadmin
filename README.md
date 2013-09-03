@@ -5,15 +5,17 @@ phphbaseadmin is a hbase admin web tool,it developed using thrift interface、ph
 
 Main features：
 --------------
-       view table record <br>
-       create table <br>
-       batch delete tables<br>
-       show table metadata<br>
-       search table record<br>
-       truncate table record<br>
-       delete table   <br>
-       update record<br>
-       delete record<br>
+       user grant manage
+       view table record 
+       create table
+       batch delete tables
+       search table record
+       truncate table record
+       delete table   
+       update record
+       delete record
+       monitor zookeeper
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/login.png)
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/main.png)   
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/createtable.png) 
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/search.png) 
@@ -29,6 +31,18 @@ Install:
 (4) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
      hbase thrift start  or  bin/hbase-daemon.sh start thrift
 <br>
-Alpha 中，各路牛人都来支持一下，加入开发啊！
+(5) create database phphbaseadmin in mysql server ,import database/phphbaseadmin.sql,modify application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
+<br>
+(6) if you use zookeeper monitor,please install cherry frame,then run cherrypy/cherry.py
+<br>
+ tar zxvf cherrypy/CherryPy-3.2.2.tar.gz
+<br>
+cd cherrypy/CherryPy-3.2.2
+<br>
+ python setup.py install
+<br>
+run cherrypy/cherrypy.py
+<br>
+(7) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
 
 

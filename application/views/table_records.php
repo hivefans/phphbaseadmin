@@ -1,7 +1,5 @@
-<link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
-<link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
 
-<script src="<?php echo $this->config->base_url();?>js/kendo.web.min.js"></script>
+
 <script>
 
 function showmeta()
@@ -109,11 +107,11 @@ function closemodal(divid)
 
 </script>
 <div class="row-fluid">
-    <div class="span9" style="margin-left: 110px;">
+    <div class="span8" style="margin-left: 50px;">
         <h2><?php echo $tablename?></h2>
     </div>
     
-    <div class="span9" style="margin-left: 110px;margin-bottom: 20px;">
+    <div class="span8" style="margin-left: 50px;margin-bottom: 20px;">
        <div class="btn-group">
           <a class="btn btn-primary" href="javascript:;" onclick="showmeta();"><i class="icon-check icon-white"></i> show metadata</a>         
        </div> 
@@ -268,7 +266,7 @@ function closemodal(divid)
       </form>
     </div>
     
-    <div class="span9" style="margin-left: 110px;">
+    <div class="span9" style="margin-left: 50px;">
       <div id="grid"></div>       
     </div>
 </div>
@@ -329,6 +327,7 @@ function closemodal(divid)
                       
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
+                        selectable: "multiple",
                         navigatable: true,
                         sortable: true,                                             
                         filterable:true,
@@ -343,7 +342,7 @@ function closemodal(divid)
                             { field: "timestamp", title: "timestamp",format: "{0:0}"},
                             { field: "value",title:"value"},
                             { command: ["edit","destroy"], title: "&nbsp;"}],                            
-                        editable: "inline"
+                        editable: "popup"
                     });
                      
                     function categoryDropDownEditor(container, options) {

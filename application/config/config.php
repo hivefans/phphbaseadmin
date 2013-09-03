@@ -367,5 +367,7 @@ $config['proxy_ips'] = '';
 $config['hbase_host'] = $configure['hbase_host'];
 $config['hbase_port'] = $configure['hbase_port'];
 $config['hbaseadmin_port'] = $configure['hbaseadmin_port'];
+$config['cherrypy_host'] = $configure['cherrypy_host'];
+$config['cherrypy_port'] = $configure['cherrypy_port'];
 
 
