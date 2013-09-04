@@ -156,42 +156,43 @@ class Hbase_table_model extends CI_Model
         
     }
     
-    public function search_table($table_name,$scomop,$srowop,$startrow,$ecomop,$erowop,$stoprow,$timestamp,$vcomop,$valop,$value)
+    public function search_table($table_name,$startrow,$stoprow,$timestamp,$column,$count)
     {
         try
         {
            $this->transport->open();
-           $count=200;
-           $filter="(PrefixFilter(''))";
-           if($startrow!="" || $stoprow!="")
-           {
-             $filter.="AND (RowFilter({$scomop}, '{$srowop}:{$startrow}')) AND (RowFilter({$ecomop}, '{$erowop}:{$stoprow}'))";
-            
-           }
-                      
-           if($timestamp!="")
-           {
-              $filter.="AND (TimestampsFilter({$timestamp}))";
-           }
-           
-           if($value!="")
-           {
-              $filter.="AND (ValueFilter({$vcomop}, '{$valop}:{$value}'))";
-           }
-           $scan = new TScan();
-           $scan->caching=200;
-           $scan->filterString=$filter;  
-           $scanner = $this->hbase->scannerOpenWithScan($table_name,$scan);
-           $get_arr = $this->hbase->scannerGetList($scanner,$count);           
-           if($get_arr==null)
-           {
-              return "null";
-           }
-           else
-           {
-              return $get_arr;
-              
-           }
+           $result="";
+           if($startrow!="" && $stoprow=="" && $timestamp=="" && $column=="")
+              {
+                $result=$this->hbase->getRow($table_name,$startrow);
+              }
+           if($startrow!="" && $stoprow=="" && $column=="" && $timestamp!="")
+              {
+                $result=$this->hbase->getRowTs($table_name,$startrow,$timestamp);                
+              }   
+           if($startrow!="" && $stoprow=="" && $timestamp=="")
+              {
+                $columns=explode(",",$column);
+                $result=$this->hbase->getRowWithColumns($table_name,$startrow,$columns);
+              }
+           if($startrow!="" && $stoprow=="")
+              {
+                $columns=explode(",",$column);
+                $result=$this->hbase->getRowWithColumnsTs($table_name,$startrow,$columns,$timestamp);
+              }
+           if($startrow!="" && $timestamp=="")
+              {
+                $columns=explode(",",$column);
+                $record=$this->hbase->scannerOpenWithStop($table_name,$startrow,$stoprow,$columns);
+                $result=$this->hbase->scannerGetList($record,$count);
+              }
+           if($startrow!="" && $stoprow!="" && $timestamp!="" && $column!="") 
+              {
+                $columns=explode(",",$column);
+                $record=$this->hbase->scannerOpenWithStopTs($table_name,$startrow,$stoprow,$columns,$timestamp);
+                $result=$this->hbase->scannerGetList($record,$count);
+              }       
+           return $result;
            $this->transport->close(); 
             
         }

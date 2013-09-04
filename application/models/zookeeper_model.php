@@ -41,9 +41,9 @@ class Zookeeper_model extends CI_Model
               $result.='{"clustername":"'.$row->cluster_name.'","serverlist":"'.$row->server_list.'"},';            
            }
            $result=rtrim($result,",");
-           $result= '['.$result.']';
-           return $result;
-        }        
+           $result= '['.$result.']';           
+        }   
+       return $result;     
     }
     public function getnodeinfo($url)
     {

@@ -181,84 +181,39 @@ function closemodal(divid)
          
          <!-- Search input-->
             <div class="control-group">
-              <label class="control-label span2" for="searchinput">start key</label>
+              <label class="control-label span2" for="searchinput">start row</label>
               <div class="controls span8">
-                <input id="startrow" name="startrow" type="text" placeholder="" class="input-medium search-query">                 
-                 <select id="scomoption" name="scomoption" class="input-mini">
-                  <option><</option>
-                  <option><=</option>
-                  <option>=</option>
-                  <option>!=</option>
-                  <option>></option>
-                  <option>>=</option>
-                 </select>
-                 
-                 <select id="srowoption" name="srowoption" class="input-small">
-                  <option>binary</option>
-                  <option>binaryprefix</option>
-                  <option>regexstring</option>
-                  <option>substring</option>
-                 </select>
+                <input id="startrow" name="startrow" type="text" placeholder="" class="input-medium search-query"> 
               </div>
             </div>
             
             <!-- Search input-->
             <div class="control-group">
-              <label class="control-label span2" for="searchinput">stop key</label>
+              <label class="control-label span2" for="searchinput">stop row</label>
               <div class="controls span8">
-                <input id="stoprow" name="stoprow" type="text" placeholder="" class="input-medium search-query">
-                    <select id="ecomoption" name="ecomoption" class="input-mini">
-                      <option><</option>
-                      <option><=</option>
-                      <option>=</option>
-                      <option>!=</option>
-                      <option>></option>
-                      <option>>=</option>
-                     </select>
-                  
-                  <select id="erowoption" name="erowoption" class="input-small">
-                  <option>binary</option>
-                  <option>binaryprefix</option>
-                  <option>regexstring</option>
-                  <option>substring</option>
-                 </select>
+                <input id="stoprow" name="stoprow" type="text" placeholder="" class="input-medium search-query">                   
               </div>
             </div>
             
-            
+              <!-- Search input-->
+            <div class="control-group">
+              <label class="control-label span2" for="searchinput">column</label>
+              <div class="controls span8">              
+                <input id="column" name="column" type="text" placeholder="" class="input-medium search-query" />
+                &nbsp;&nbsp;example:col1,col2                
+              </div>
+            </div>
             <!-- Search input-->
             <div class="control-group">
               <label class="control-label span2" for="searchinput">timestamp</label>
               <div class="controls span8">
-                <input id="starttime" name="starttime" type="text" placeholder="" class="input-medium search-query"> 
-                
-                </label>               
+                <input id="starttime" name="starttime" type="text" placeholder="" class="input-medium search-query" /> 
+                &nbsp;example:1355930517620 
+                             
               </div>
              
-            </div>
-            
-            <!-- Search input-->
-            <div class="control-group">
-              <label class="control-label span2" for="searchinput">value</label>
-              <div class="controls span8">
-                <input id="wordvalue" name="wordvalue" type="text" placeholder="" class="input-medium search-query">
-                <select id="vcomoption" name="vcomoption" class="input-mini">
-                      <option><</option>
-                      <option><=</option>
-                      <option>=</option>
-                      <option>!=</option>
-                      <option>></option>
-                      <option>>=</option>
-                     </select>
-                  
-                  <select id="valueoption" name="valueoption" class="input-small">
-                  <option>binary</option>
-                  <option>binaryprefix</option>
-                  <option>regexstring</option>
-                  <option>substring</option>
-                 </select>
-              </div>
-            </div>
+            </div>            
+           
             
       </div>
       <div class="modal-footer"> 

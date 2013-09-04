@@ -99,7 +99,8 @@ class Monitor extends CI_Controller
               $watches=$wchsarr[1];                    
             }
            if($command=="stat")
-            {                
+            {   
+                $connection=0;
                 if(preg_match("/Mode: (\S+)/i",$str,$modestr))
                 {
                     $mode=$modestr[1];                    
@@ -109,7 +110,7 @@ class Monitor extends CI_Controller
                     $nodecount=$nodecountstr[1];                    
                 }
                 if(preg_match("/Connections: (\S+)/i",$str,$connectionstr))
-                {
+                {                    
                     $connection=$connectionstr[1];                    
                 }
                 if(preg_match("/Outstanding: (\S+)/i",$str,$outstandstr))

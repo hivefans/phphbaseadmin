@@ -140,10 +140,10 @@ class Tables extends CI_Controller
                 foreach($cols->columns as $key=>$vals)
                  {  
                     $row=$cols->row;
-                    //$row=unpack('C*',$row);
-                    //$row=implode("",$row);                        
+                    $row=stripslashes($row);                        
                     $column=explode(":",$key);                        
-                    $value=$vals->value;                         
+                    $value=$vals->value;  
+                    $value=addslashes($value);                       
                     $value=json_encode($value);                        
                     $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
                     $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";
@@ -177,21 +177,16 @@ class Tables extends CI_Controller
     }
     
     public function SearchTableQuery($table_name)
-    {
-       $scomop=$this->input->post("scomoption");
-       $srowop=$this->input->post("srowoption");
-       $srow=$this->input->post("startrow"); 
-       $ecomop=$this->input->post("ecomoption");
-       $erowop=$this->input->post("erowoption");
+    {       
+       $srow=$this->input->post("startrow");       
        $erow=$this->input->post("stoprow");
-       $timestamp=$this->input->post("starttime");
-       $vcomop=$this->input->post("vcomoption");
-       $valueoption=$this->input->post("valueoption");
-       $value=$this->input->post("wordvalue");
-       
+       $timestamp=$this->input->post("starttime");      
+       $column=$this->input->post("column");       
        $this->load->model('hbase_table_model', 'table');
-       $records= $this->table->search_table($table_name,$scomop,$srowop,$srow,$ecomop,$erowop,$erow,$timestamp,$vcomop,$valueoption,$value);
+       $count=100;
+       $records= $this->table->search_table($table_name,$srow,$erow,$timestamp,$column,$count);
       
+       
        if(is_array($records))
         {       
             $result="";
@@ -213,7 +208,7 @@ class Tables extends CI_Controller
         }
         else
         {
-            $result='{"row":""}'; 
+            $result='{"row":"no record"}'; 
         } 
         
         return($result);       
@@ -295,17 +290,23 @@ class Tables extends CI_Controller
     }
     public function TruncateTable($table_name)
     {
+      if($this->session->userdata('group')=='admin'){ 
         $this->load->model('hbase_table_model', 'table');
         $result=$this->table->truncate_table($table_name);
         echo($result);
+       }
+       else echo "sorry,No authority!";  
     }
     
     public function DelTable($table_name)
-    {
+    { 
+      if($this->session->userdata('group')=='admin'){
         $this->load->model('hbase_table_model', 'table');
         $this->table->disable_table($table_name);
         $result=$this->table->delete_table($table_name);
         echo($result);
+         }
+       else echo "sorry,No authority!";
     }
     
     public function DelAllTable()
