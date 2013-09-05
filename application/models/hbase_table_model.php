@@ -163,24 +163,24 @@ class Hbase_table_model extends CI_Model
            $this->transport->open();
            $result="";
            if($startrow!="" && $stoprow=="" && $timestamp=="" && $column=="")
-              {
+              {                
                 $result=$this->hbase->getRow($table_name,$startrow);
               }
            if($startrow!="" && $stoprow=="" && $column=="" && $timestamp!="")
               {
                 $result=$this->hbase->getRowTs($table_name,$startrow,$timestamp);                
               }   
-           if($startrow!="" && $stoprow=="" && $timestamp=="")
+           if($startrow!="" && $stoprow=="" && $timestamp=="" && $column!="")
               {
                 $columns=explode(",",$column);
                 $result=$this->hbase->getRowWithColumns($table_name,$startrow,$columns);
               }
-           if($startrow!="" && $stoprow=="")
+           if($startrow!="" && $stoprow=="" && $timestamp!="" && $column!="")
               {
                 $columns=explode(",",$column);
                 $result=$this->hbase->getRowWithColumnsTs($table_name,$startrow,$columns,$timestamp);
               }
-           if($startrow!="" && $timestamp=="")
+           if($startrow!="" && $timestamp=="" && $stoprow!="" && $column!="")
               {
                 $columns=explode(",",$column);
                 $record=$this->hbase->scannerOpenWithStop($table_name,$startrow,$stoprow,$columns);

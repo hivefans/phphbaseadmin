@@ -71,7 +71,18 @@ function showdeltable()
     <?php
      if($this->session->userdata('group')=='admin')
       {
-   ?>  
+   ?> 
+   $.getJSON('<?php echo $this->config->base_url();?>index.php/tables/tablelist/', function(json){
+	var names = json.table_names;
+	var html="";
+	$('#tbnames tbody').empty();
+	$.each(names,function(index, content){
+		html += '<tr><td id="'+content+'">';
+		html += content;
+		html += '</td><td><input type="checkbox" value="'+content+'" name="selected_table_name[]"> </td></tr>';
+	});
+	$('#tbnames tbody').append(html);     
+    }); 
    $('#deltabdiv').modal({
          backdrop:true
       });
@@ -152,20 +163,6 @@ $(function() {
      });     
      
   
-     
-}); 
-
-$.getJSON('<?php echo $this->config->base_url();?>index.php/tables/tablelist/', function(json){
-	var names = json.table_names;
-	var html="";
-	$('#tbnames tbody').empty();
-	$.each(names,function(index, content){
-		html += '<tr><td id="'+content+'">';
-		html += content;
-		html += '</td><td><input type="checkbox" value="'+content+'" name="selected_table_name[]"> </td></tr>';
-	});
-	$('#tbnames tbody').append(html);
-         
      
 });
 

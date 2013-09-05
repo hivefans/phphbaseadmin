@@ -185,7 +185,6 @@ class Tables extends CI_Controller
        $this->load->model('hbase_table_model', 'table');
        $count=100;
        $records= $this->table->search_table($table_name,$srow,$erow,$timestamp,$column,$count);
-      
        
        if(is_array($records))
         {       

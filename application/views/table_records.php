@@ -180,7 +180,7 @@ function closemodal(divid)
             <div class="control-group">
               <label class="control-label span2" for="searchinput">start row</label>
               <div class="controls span8">
-                <input id="startrow" name="startrow" type="text" placeholder="" class="input-medium search-query">
+                <input id="startrow" name="startrow" type="text" placeholder="start row key" class="input-medium search-query" required>
               </div>
             </div>
             
