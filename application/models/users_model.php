@@ -64,6 +64,24 @@ class Users_model extends CI_Model {
 	    return $result;  
 	}//create_member
     
+    function create_group()
+	{
+
+		$this->db->where('name', $this->input->post('groupname'));
+		$query = $this->db->get('usergroup');
+        if($query->num_rows > 0){
+            $result=false;
+		}else{
+
+			$new_group_insert_data = array(
+				'name' => $this->input->post('groupname')										
+			);
+			$result = $this->db->insert('usergroup', $new_group_insert_data);
+		    
+		}
+	    return $result;  
+	}
+    
     function update_member($id)
 	{
 	   $password=$this->input->post('password');
@@ -82,41 +100,66 @@ class Users_model extends CI_Model {
 				'grant' => $this->input->post('grant'),
 				'pass_word' => $updatepass						
 			);
-		
-        $this->db->where('id', $id);
-		$this->db->update('member', $member_update_data);
-        if($this->input->post('username')==$this->session->userdata('user_name'))
-          {
-             $data = array(
-				'user_name' => $this->input->post('username'),
-				'is_logged_in' => true,
-                'group'=>$this->input->post('groupname'),
-                'grant'=>$this->input->post('grant')
-			);
-            $this->session->set_userdata($data);
-          }
-                
-		$report = array();
-		$report['error'] = $this->db->_error_number();
-		$report['message'] = $this->db->_error_message();
-		if($report !== 0){
-			return true;
-		}else{
-			return false;
-		}
-	     
+		$username=$this->input->post('username');
+        $this->db->where('user_name', $username);
+        $query = $this->db->get('member');
+        if($query->num_rows > 0){
+            $result=false;
+         }
+        else{
+            $this->db->where('id', $id);
+            $this->db->update('member', $member_update_data);
+            $result=true;
+            if($this->input->post('username')==$this->session->userdata('user_name'))
+              {
+                 $data = array(
+    				'user_name' => $this->input->post('username'),
+    				'is_logged_in' => true,
+                    'group'=>$this->input->post('groupname'),
+                    'grant'=>$this->input->post('grant')
+    			);
+                $this->session->set_userdata($data);
+              }
+        }
+       return $result; 
 	}
     
+    
+    function update_group($id)
+    {
+       $group_update_data = array(
+				'name' => $this->input->post('groupname')										
+			);
+       $groupname=$this->input->post('groupname');     
+       $this->db->where('name', $groupname);
+       $query = $this->db->get('usergroup');
+       if($query->num_rows > 0){
+            $result=false;
+         }
+         else{
+            $this->db->where('id', $id);
+            $this->db->update('usergroup', $group_update_data);
+            $result=true;            
+         }
+       return $result;  
+    }
     
     /**
     * Get the user's group data from the database
     * @return Array 
     */
-    function get_usergroup()
+    function get_usergroup($id = FALSE)
     {
-       $this->db->select('*');
-	   $this->db->from('usergroup'); 
-       $query = $this->db->get();		
+       if($id==FALSE)
+       { 
+           $this->db->select('*');
+    	   $this->db->from('usergroup'); 
+           $query = $this->db->get();
+       }
+       else
+       {
+          $query = $this->db->get_where('usergroup', array('id' => $id));
+       }    		
 	   return $query->result_array();
     }
     
@@ -139,6 +182,12 @@ class Users_model extends CI_Model {
     {
        $this->db->where('id', $id);
 	   $this->db->delete('member'); 
+    } 
+    
+    function delete_group($id)
+    {
+       $this->db->where('id', $id);
+	   $this->db->delete('usergroup'); 
     }   
   
     

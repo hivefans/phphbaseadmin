@@ -79,6 +79,16 @@ class Manage extends CI_Controller
       $this->load->view('footer');
     }
     
+     function groupinfo()
+    {
+      $this->load->model('hbase_table_model','table');
+      $this->table->headnav();  
+      $this->load->model('users_model');
+      $data['groups'] = $this->users_model->get_usergroup();  
+      $this->load->view('manage/groupinfo',$data);  
+      $this->load->view('footer');
+    }
+    
     function adduser()
     {
       $this->load->model('hbase_table_model','table');
@@ -116,7 +126,7 @@ class Manage extends CI_Controller
     
     function edit($id)
     {
-       $this->load->model('hbase_table_model','table');
+      $this->load->model('hbase_table_model','table');
       $this->table->headnav();
       $tables=$this->table->get_table_names();
       $result='';
@@ -137,8 +147,7 @@ class Manage extends CI_Controller
            if ($this->form_validation->run())
             {
                 if($this->users_model->update_member($id)){
-                    $data['flash_message'] = TRUE; 
-                   // redirect('manage/edit/'.$id);
+                    $data['flash_message'] = TRUE;                   
                 }else{
                     $data['flash_message'] = FALSE; 
                 }
@@ -149,13 +158,69 @@ class Manage extends CI_Controller
       $this->load->view('footer');
     }
     
+    function groupedit($id)
+    {
+       $this->load->model('hbase_table_model','table');
+       $this->table->headnav(); 
+       $this->load->model('users_model'); 
+       $data['groupname']=  $this->users_model->get_usergroup($id);
+       $data['user_name']=$this->session->userdata('user_name');
+        if ($this->input->server('REQUEST_METHOD') === 'POST')
+          {           
+           $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|min_length[4]');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+          } 
+        if ($this->form_validation->run())
+          {
+             if($this->users_model->update_group($id)){
+                $data['flash_message'] = TRUE;                   
+              }else{
+                $data['flash_message'] = FALSE; 
+              }
+          }
+       
+       $this->load->view('manage/editgroup',$data);  
+       $this->load->view('footer');
+    }
+    
+    function addgroup()
+    {
+       $this->load->model('hbase_table_model','table');
+       $this->table->headnav(); 
+       $this->load->model('users_model'); 
+       $data['user_name']=$this->session->userdata('user_name');
+        if ($this->input->server('REQUEST_METHOD') === 'POST')
+          {           
+           $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|min_length[4]');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+          } 
+        if ($this->form_validation->run())
+          {
+             if($this->users_model->create_group()){
+                $data['flash_message'] = TRUE;                   
+              }else{
+                $data['flash_message'] = FALSE; 
+              }
+          }  
+       $this->load->view('manage/addgroup',$data);  
+       $this->load->view('footer');
+    }
+    
+    
     function delete($id)
     {
        $this->load->model('users_model'); 
        $this->users_model->delete_user($id); 
        echo "<script>alert('delete user success');</script>";
-        redirect('manage/userinfo');
-        
+        redirect('manage/userinfo');        
+    }
+    
+     function deletegroup($id)
+    {
+       $this->load->model('users_model'); 
+       $this->users_model->delete_group($id); 
+       echo "<script>alert('delete group success');</script>";
+        redirect('manage/groupinfo');        
     }
     
     

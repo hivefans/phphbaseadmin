@@ -34,6 +34,7 @@
                    if($this->session->userdata('group')=='admin'){
                     ?>
                    <li><a href="<?php echo $this->config->base_url();?>index.php/manage/userinfo">user manage</a></li> 
+                   <li><a href="<?php echo $this->config->base_url();?>index.php/manage/groupinfo">group manage</a></li> 
                    <?php }?>
             	    <li><a href="<?php echo $this->config->base_url();?>index.php/manage/logout">logout</a></li>                   
                        

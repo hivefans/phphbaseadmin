@@ -140,10 +140,10 @@ class Tables extends CI_Controller
                 foreach($cols->columns as $key=>$vals)
                  {  
                     $row=$cols->row;
-                    $row=stripslashes($row);                        
+                    $row=mysql_real_escape_string($row);                                            
                     $column=explode(":",$key);                        
                     $value=$vals->value;  
-                    $value=addslashes($value);                       
+                    $value=mysql_real_escape_string($value);                       
                     $value=json_encode($value);                        
                     $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
                     $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";

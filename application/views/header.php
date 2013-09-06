@@ -25,12 +25,13 @@
 	<!-- start: JavaScript -->
 	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
      
-	<script src="<?php echo $this->config->base_url();?>js/highcharts.js"></script>
-	<script src="<?php echo $this->config->base_url();?>js/exporting.js"></script>
+
+
 	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
     <script src="<?php echo $this->config->base_url();?>js/kendo.web.min.js"></script>     
-     <script src="<?php echo $this->config->base_url();?>js/jquery.mulitselector.js"></script>  
+     <script src="<?php echo $this->config->base_url();?>js/jquery.mulitselector.js"></script>
+      <script src="<?php echo $this->config->base_url();?>js/amcharts.js" type="text/javascript"></script> 
 	<!-- end: JavaScript-->
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
