@@ -53,136 +53,8 @@
 
 </div>
 <script>
-function showchart(ip,port)
-{
-   $('#zktrenddiv').modal({
-         backdrop:true
-      });     
-           var chart;
-           var chartData = [];            
-                // generate some random data first
-                generateChartData();
 
-                // SERIAL CHART    
-                chart = new AmCharts.AmSerialChart();
-                chart.pathToImages = "<?php echo $this->config->base_url();?>js/images/";
-                chart.zoomOutButton = {
-                    backgroundColor: '#000000',
-                    backgroundAlpha: 0.15
-                };
-                chart.dataProvider = chartData;
-                chart.categoryField = "date";
 
-                // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
-                chart.addListener("dataUpdated", zoomChart);
-
-                // AXES
-                // category                
-                var categoryAxis = chart.categoryAxis;
-                categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
-                categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
-                categoryAxis.dashLength = 2;
-                categoryAxis.gridAlpha = 0.15;
-                categoryAxis.axisColor = "#DADADA";
-
-                // first value axis (on the left)
-                var valueAxis1 = new AmCharts.ValueAxis();
-                valueAxis1.axisColor = "#FF6600";
-                valueAxis1.axisThickness = 2;
-                valueAxis1.gridAlpha = 0;
-                chart.addValueAxis(valueAxis1);
-
-                // second value axis (on the right) 
-                var valueAxis2 = new AmCharts.ValueAxis();
-                valueAxis2.position = "right"; // this line makes the axis to appear on the right
-                valueAxis2.axisColor = "#FCD202";
-                valueAxis2.gridAlpha = 0;
-                valueAxis2.axisThickness = 2;
-                chart.addValueAxis(valueAxis2);
-
-                // third value axis (on the left, detached)
-                valueAxis3 = new AmCharts.ValueAxis();
-                valueAxis3.offset = 50; // this line makes the axis to appear detached from plot area
-                valueAxis3.gridAlpha = 0;
-                valueAxis3.axisColor = "#B0DE09";
-                valueAxis3.axisThickness = 2;
-                chart.addValueAxis(valueAxis3);
-
-                // GRAPHS
-                // first graph
-                var graph1 = new AmCharts.AmGraph();
-                graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-                graph1.title = "red line";
-                graph1.valueField = "visits";
-                graph1.bullet = "round";
-                graph1.hideBulletsCount = 30;
-                chart.addGraph(graph1);
-
-                // second graph                
-                var graph2 = new AmCharts.AmGraph();
-                graph2.valueAxis = valueAxis2; // we have to indicate which value axis should be used
-                graph2.title = "yellow line";
-                graph2.valueField = "hits";
-                graph2.bullet = "square";
-                graph2.hideBulletsCount = 30;
-                chart.addGraph(graph2);
-
-                // third graph
-                var graph3 = new AmCharts.AmGraph();
-                graph3.valueAxis = valueAxis3; // we have to indicate which value axis should be used
-                graph3.valueField = "views";
-                graph3.title = "green line";
-                graph3.bullet = "triangleUp";
-                graph3.hideBulletsCount = 30;
-                chart.addGraph(graph3);
-
-                // CURSOR
-                var chartCursor = new AmCharts.ChartCursor();
-                chartCursor.cursorPosition = "mouse";
-                chart.addChartCursor(chartCursor);
-
-                // SCROLLBAR
-                var chartScrollbar = new AmCharts.ChartScrollbar();
-                chart.addChartScrollbar(chartScrollbar);
-
-                // LEGEND
-                var legend = new AmCharts.AmLegend();
-                legend.marginLeft = 110;
-                chart.addLegend(legend);
-
-                // WRITE
-                chart.write("zkchartdiv");
-           
-
-            // generate some random data, quite different range
-            function generateChartData() {
-                var firstDate = new Date();
-                firstDate.setDate(firstDate.getDate() - 50);
-
-                for (var i = 0; i < 50; i++) {
-                    var newDate = new Date(firstDate);
-                    newDate.setDate(newDate.getDate() + i);
-
-                    var visits = Math.round(Math.random() * 40) + 100;
-                    var hits = Math.round(Math.random() * 80) + 500;
-                    var views = Math.round(Math.random() * 6000);
-
-                    chartData.push({
-                        date: newDate,
-                        visits: visits,
-                        hits: hits,
-                        views: views
-                    });
-                }
-            }
-
-            // this method is called when chart is first inited as we listen for "dataUpdated" event
-            function zoomChart() {
-                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-                chart.zoomToIndexes(10, 20);
-            }
-               
-}
 
 </script>
 <div class="modal hide" id="zktrenddiv" style="width:800px;">
@@ -202,14 +74,30 @@ $.each(clusterinfo,function(index,content){
     selhtml+="<option value="+content.serverlist+">"+content.clustername+"</option>";        
 })
 $("#clustersel").append(selhtml);
+//get ajax result
+function getstatresult(url)
+{  
+   var result="";
+   $.ajax({
+         url:url,
+         async:false,
+         type:"GET",
+         success:function(msg){ 
+           result=msg;     
+         }   
+    });
+   return result; 
+}
 
+//get zookeeper stat 
 function getstat()
 {
    var checkText=$("#clustersel").find("option:selected").text();
     var serverlist=$("#clustersel").val();
     var serverarr=new Array();
     var tbhtml="";   
-    serverarr=serverlist.split(","); 
+    serverarr=serverlist.split(",");
+    
    if(checkText!="choose cluster")
      {   
         for(i=0;i<serverarr.length;i++)
@@ -231,20 +119,13 @@ function getstat()
                 onlinehtml='<button class="btn btn-mini btn-success" type="button">online</button>';        
                  var staturl="<?php echo $this->config->base_url();?>index.php/monitor/getserverinfo?qry=stat&server="+serverip+"&port="+serverport+"&command=stat"; 
                  var serverstat="";
-                 $.ajax({
-                   url:staturl,
-                   async:false,
-                   type:"GET",
-                   success:function(msg){ 
-                      var result=eval ("(" + msg + ")");
-                      serverstat="<td>"+result.mode+"</td><td>"+result.watches+"</td><td>"+result.connection+"</td><td>"+result.sent+"</td><td>"+result.received;
-                      serverstat+="</td><td>"+result.nodecount+"</td><td>"+result.zxid+"</td><td>"+result.latency+"</td>";
-                      
-                    }   
-                });
+                 var result=getstatresult(staturl);                 
+                 result=eval ("(" + result + ")");
+                 serverstat="<td>"+result.mode+"</td><td>"+result.watches+"</td><td>"+result.connection+"</td><td>"+result.sent+"</td><td>"+result.received;
+                 serverstat+="</td><td>"+result.nodecount+"</td><td>"+result.zxid+"</td><td>"+result.latency+"</td>";                 
+                 tbhtml+="<tr><td><a href='javascript:;' onclick=getchild('"+serverip+"','"+serverport+"','/');>"+serverip+" <i class='icon-zoom-in'></i></a></td>"+"<td>"+onlinehtml+"</td>"+serverstat;
+                 tbhtml+="<td><a href='javascript:;' onclick=showchart('"+serverip+"','"+serverport+"');><i class='icon-signal'></i></a></td></tr>";           
                  
-                tbhtml+="<tr><td><a href='javascript:;' onclick=getchild('"+serverip+"','"+serverport+"','/');>"+serverip+" <i class='icon-zoom-in'></i></a></td>"+"<td>"+onlinehtml+"</td>"+serverstat;
-                tbhtml+="<td><a href='javascript:;' onclick=showchart('"+serverip+"','"+serverport+"');><i class='icon-signal'></i></a></td></tr>";           
               }
              else
              {
@@ -313,7 +194,127 @@ function getchild(serverip,serverport,path)
     
 }
 
+//create zookeeper stat chart
+function showchart(serverip,serverport)
+{
+   $('#zktrenddiv').modal({
+         backdrop:true
+      });     
+//zookeeper stat chart
 
+var chart;
+var chartData = [];
+var chartCursor;
+var second = 0;
+var firstDate = new Date();
+firstDate.setSeconds(firstDate.getSeconds() - 30);
+ 
+
+// generate some random data, quite different range
+function generateChartData() {
+    for (second = 0; second < 30; second++) {
+        var newDate = new Date(firstDate);
+        newDate.setSeconds(newDate.getSeconds() + second);                     
+        var visits = 1;;
+        chartData.push({
+            date: newDate,
+            visits: visits
+        });
+    }
+}
+
+// create chart
+    generateChartData();
+    // SERIAL CHART    
+    chart = new AmCharts.AmSerialChart();
+    chart.pathToImages = "http://www.amcharts.com/lib/images/";
+    chart.marginTop = 0;
+    chart.marginRight = 10;
+    chart.autoMarginOffset = 5;
+    chart.zoomOutButton = {
+        backgroundColor: '#000000',
+        backgroundAlpha: 0.15
+    };
+    chart.dataProvider = chartData;
+    chart.categoryField = "date";
+
+    // AXES
+    // category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+    categoryAxis.minPeriod = "ss"; // our data is daily, so we set minPeriod to DD
+    categoryAxis.dashLength = 1;
+    categoryAxis.gridAlpha = 0.15;
+    categoryAxis.axisColor = "#DADADA";
+
+    // value                
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.axisAlpha = 0.2;
+    valueAxis.dashLength = 1;
+    chart.addValueAxis(valueAxis);
+
+    // GRAPH
+    var graph = new AmCharts.AmGraph();
+    graph.title = "red line";
+    graph.valueField = "visits";
+    graph.bullet = "round";
+    graph.bulletBorderColor = "#FFFFFF";
+    graph.bulletBorderThickness = 2;
+    graph.lineThickness = 2;
+    graph.lineColor = "#b5030d";
+    graph.negativeLineColor = "#0352b5";
+    graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
+    chart.addGraph(graph);
+
+    // CURSOR
+    chartCursor = new AmCharts.ChartCursor();
+    chartCursor.cursorPosition = "mouse";
+    chart.addChartCursor(chartCursor);
+
+    // SCROLLBAR
+    var chartScrollbar = new AmCharts.ChartScrollbar();
+    chartScrollbar.graph = graph;
+    chartScrollbar.scrollbarHeight = 40;
+    chartScrollbar.color = "#FFFFFF";
+    chartScrollbar.autoGridCount = true;
+    chart.addChartScrollbar(chartScrollbar);
+
+    // WRITE
+    chart.write("zkchartdiv");
+    
+    // set up the chart to update every second
+    setInterval(function () {
+        // normally you would load new datapoints here,
+        // but we will just generate some random values
+        // and remove the value from the beginning so that
+        // we get nice sliding graph feeling
+        
+        // remove datapoint from the beginning
+        chart.dataProvider.shift();
+        
+        // add new one at the end
+        second++;
+        var newDate = new Date(firstDate);
+        newDate.setSeconds(newDate.getSeconds() + second);
+        var staturl="<?php echo $this->config->base_url();?>index.php/monitor/getserverinfo?qry=stat&server="+serverip+"&port="+serverport+"&command=stat";
+        var result=getstatresult(staturl);                 
+        result=eval ("(" + result + ")");
+        var visits = result.watches;
+        chart.dataProvider.push({
+            date: newDate,
+            visits: visits
+        });
+        chart.validateData();
+    }, 3000);
+  
+   
+   
+  
+}
+
+
+
+//chart
 
 
 $("#clustersel").change(function(){
