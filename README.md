@@ -25,24 +25,13 @@ Main features：
 <br>
 Install:
 --------------------
-(1) setup apache or nginx <br>
-(2) git clone phphbaseadmin ,put phphbaseadmin directory to web app directory <br>
-(3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
-(4) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
+(1) execute script setup_centos5.sh or setup_centos6.sh to install apache php mysql-server <br>
+(2) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
      hbase thrift start  or  bin/hbase-daemon.sh start thrift
 <br>
-(5) create database phphbaseadmin in mysql server ,import database/phphbaseadmin.sql,modify application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
+(3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
+(4) create database phphbaseadmin in mysql server ,import database/phphbaseadmin.sql,edit application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
 <br>
-(6) if you use zookeeper monitor,please install cherry frame,then run cherrypy/cherry.py
-<br>
- tar zxvf cherrypy/CherryPy-3.2.2.tar.gz
-<br>
-cd cherrypy/CherryPy-3.2.2
-<br>
- python setup.py install
-<br>
-run cherrypy/cherrypy.py
-<br>
-(7) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
+(5) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
 
 
