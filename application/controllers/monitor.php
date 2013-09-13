@@ -17,10 +17,10 @@ class Monitor extends CI_Controller
         $this->hbasetable->headnav();
         $this->load->view('div_fluid');
 		$this->load->view('div_row_fluid');
-		$this->load->view('zookeeper_admin');
+		$this->load->view('monitor/zookeeper_admin');
         $this->load->model('Zookeeper_model','monitor');
         $data["clusterinfo"]=$this->monitor->getcluster();
-        $this->load->view('cluster_add',$data);
+        $this->load->view('monitor/cluster_add',$data);
         $this->load->view('div_end');
 		$this->load->view('div_end');		
 		$this->load->view('footer');
@@ -54,30 +54,14 @@ class Monitor extends CI_Controller
         $this->hbasetable->headnav();
         $this->load->view('div_fluid');
 		$this->load->view('div_row_fluid');
-        $this->load->view('zookeeper_admin');
+        $this->load->view('monitor/zookeeper_admin');
         $this->load->model('Zookeeper_model','monitor');
         $data["clusterinfo"]=$this->monitor->getcluster();        
-		$this->load->view('cluster_monitor',$data);        
+		$this->load->view('monitor/cluster_monitor',$data);        
         $this->load->view('div_end');
 		$this->load->view('div_end');		
 		$this->load->view('footer');
     }
-    
-    public function Stat_trend()
-    {
-        $this->load->model('hbase_table_model','hbasetable');
-        $this->hbasetable->headnav();
-        $this->load->view('div_fluid');
-		$this->load->view('div_row_fluid');
-        $this->load->view('zookeeper_admin');
-        $this->load->model('Zookeeper_model','monitor');               
-		$this->load->view('stat_trend');        
-        $this->load->view('div_end');
-		$this->load->view('div_end');		
-		$this->load->view('footer');
-        
-    }
-    
     
     public function getserverinfo()
     {
@@ -152,25 +136,22 @@ class Monitor extends CI_Controller
          {
             $url=$host."/getchild?server=".$server."&port=".$port."&path=".$path;
             $result=$this->monitor->getnodeinfo($url);
-         }       
-        
+         } 
          echo $result;
-        
     }
     
-    public function Nodestat()
+   public function Zkmonitor_help()
     {
-        $this->load->model('hbase_table_model','hbasetable');
-        $this->hbasetable->headnav();
-        $this->load->view('div_fluid');
-		$this->load->view('div_row_fluid');
-        $this->load->view('zookeeper_admin');
-        $this->load->model('Zookeeper_model','monitor'); 
-        $data["server"]=$this->input->get("server");
-        $data["port"]=$this->input->get("port");                    
-		$this->load->view('node_stat',$data);        
-        $this->load->view('div_end');
-		$this->load->view('div_end');		
-		$this->load->view('footer');
-    }
+       $this->load->model('hbase_table_model','hbasetable');
+       $this->hbasetable->headnav();
+       $this->load->view('div_fluid');
+	   $this->load->view('div_row_fluid');
+       $this->load->view('monitor/zookeeper_admin');
+       $this->load->view('monitor/zkmonitor_help'); 
+       $this->load->view('div_end');
+	   $this->load->view('div_end');		
+	   $this->load->view('footer'); 
+        
+    } 
+   
 }

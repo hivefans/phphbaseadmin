@@ -52,7 +52,7 @@
         <div class="main-col">
             <img src="<?php echo $this->config->base_url();?>img/hbase.png" alt="" class="logo_img" />
             <div class="panel">
-                <p class="heading_main">Account Login</p>
+                <p class="heading_main">PhpHbaseAdmin</p>
                 <form id="login-validate" action="<?php echo $this->config->base_url();?>index.php/manage/validate_user" method="post">
                     <label for="login_name">Login</label>
                     <input type="text" id="user_name" name="user_name" value="" />

@@ -13,7 +13,7 @@
       }
       ?>
 <?php echo validation_errors(); ?>
-<div id="content" class='container_12'>
+<div id="content" class='container_12 rmonitor'>
   	
 	<div id="title">
         <div class="grid_6" id="title-header"><a href="<?php echo site_url("manage/groupinfo")?>">Group Manage</a> / Edit</div>

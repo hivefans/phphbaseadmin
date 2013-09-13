@@ -1,6 +1,5 @@
 <!--Nav bar area-->
-
-<div class="navbar">
+<div id="navibar" class="navbar">
 	<div class="navbar-inner">
 		<a class="brand" href="<?php echo $this->config->base_url();?>"><?php echo $common_title;?></a>
 		<div class="container">
@@ -22,7 +21,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $common_monitor;?>  <b class="caret"></b></a> 
 				   <ul class="dropdown-menu bottom-up pull-right">
             	    <li><a href="<?php echo $this->config->base_url();?>index.php/monitor/zookeeper/">ZooKeeper Monitor</a></li>
-                    <li><a href="<?php echo $this->config->base_url();?>index.php/monitor/hbase/">Hbase Monitor</a></li>
+                   <!-- <li><a href="<?php echo $this->config->base_url();?>index.php/monitor/hbase/">Hbase Monitor</a></li>-->
                        
                       </ul>
 				</li>

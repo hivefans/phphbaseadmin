@@ -1,11 +1,10 @@
-<div class="span8" style="margin-left: 120px;">
-<div class="row">
-  
+<div id="content">
+<div class="row">  
   <div class="span4"></div>
   
   <div class="span4">
    <h2>phphbaseadmin</h2>
-  <img src="<?php echo $this->config->base_url();?>/img/hbase.jpeg" />   
+  <img src="<?php echo $this->config->base_url();?>/img/hbase.png" />   
   </div>
   
 </div>
@@ -52,8 +51,6 @@
     </tr>
   </tbody>   
    </table>
-
 </div>
-
-
+</div>
 </div>

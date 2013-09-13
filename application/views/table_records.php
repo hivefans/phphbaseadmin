@@ -1,7 +1,4 @@
-
-
 <script>
-
 function showmeta()
 {
     $('#metadata').modal({
@@ -105,12 +102,12 @@ function closemodal(divid)
 }
 
 </script>
-<div class="row-fluid">
-    <div class="span8" style="margin-left: 50px;">
+
+    <div>
         <h2><?php echo $tablename?></h2>
     </div>
     
-    <div class="span8" style="margin-left: 50px;margin-bottom: 20px;">
+    <div style="margin-bottom: 20px;">
        <div class="btn-group">
           <a class="btn btn-primary" href="javascript:;" onclick="showmeta();"><i class="icon-check icon-white"></i> show metadata</a>         
        </div> 
@@ -218,16 +215,13 @@ function closemodal(divid)
       </form>
     </div>
     
-    <div class="span9" style="margin-left: 50px;">
+    <div>
       <div id="grid"></div>       
     </div>
-</div>
 
 
 <script>
-
-
-        
+     
   $(document).ready(function () {
                     var crudServiceBaseUrl = "<?php echo $this->config->base_url();?>index.php/tables",
                          
@@ -314,19 +308,17 @@ function closemodal(divid)
                             
                         });
                         
-                };                
-                
-                     function onRequestEnd(e) { 
-                           if(e.type=="update" || e.type=="create")
+                };
+                   function onRequestEnd(e) { 
+                       if(e.type=="update" || e.type=="create")
                              {                                
                                  alert(e.response[0].result);
                                  location.reload();
                                                                  
                              }  
-                       };
+                    };
                
- });
-                
-                
+ });           
+             
 </script>
 

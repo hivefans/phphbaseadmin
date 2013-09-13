@@ -15,7 +15,18 @@ class Tables extends CI_Controller
 	{	    
 		$this->load->model('hbase_table_model','table');
         $this->table->headnav();
-        $hbaseinfo =$this->table->get_hbase_info();
+		$this->load->view('div_fluid');
+		$this->load->view('div_row_fluid');
+		$this->load->view('table_lists');
+		$this->load->view('div_end');
+		$this->load->view('div_end');		
+		$this->load->view('footer');
+	}
+    
+    public function Gethbaseinfo()
+    {
+       $this->load->model('hbase_table_model', 'table'); 
+       $hbaseinfo =$this->table->get_hbase_info();
         $hbasedata=json_decode($hbaseinfo,true);
         foreach($hbasedata["beans"] as $mbean)
          {
@@ -34,17 +45,8 @@ class Tables extends CI_Controller
                 $data["Coprocessors"]=$mbean["Coprocessors"]; 
             }            
          }
-		
-		$this->load->view('div_fluid');
-		$this->load->view('div_row_fluid');
-		$this->load->view('table_lists',$data);		
-		$this->load->view('table_admin', $data);
-		
-		$this->load->view('div_end');
-		$this->load->view('div_end');
-		
-		$this->load->view('footer');
-	}
+        $this->load->view('table_admin', $data); 
+    }
 	
 	public function TableList()
 	{		
@@ -131,7 +133,7 @@ class Tables extends CI_Controller
     public function GetTableRecords($table_name)
     {
         $this->load->model('hbase_table_model', 'table');        
-        $count=200;
+        $count=100;
         $records= $this->table->get_table_records($table_name,$count); 
         if(is_array($records))
         {       
@@ -199,22 +201,16 @@ class Tables extends CI_Controller
                     $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
                     $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";
                   }
-             }
-              
+             }              
             $result=rtrim($result,",");
             $result= '['.$result.']';
-            
         }
         else
         {
             $result='{"row":"no record"}'; 
         } 
-        
-        return($result);       
-        
+        return($result);
     }
-    
-    
     
     public function UpdateRecords($table_name)
     {
@@ -271,22 +267,14 @@ class Tables extends CI_Controller
     
     
     public function ListTableRecords($table_name)
-    {
-        
-		$this->load->model('hbase_table_model','table');
-        $this->table->headnav();
-		$this->load->view('div_fluid');
-		$this->load->view('div_row_fluid');		
+    {	
 		$data['tablename']=$table_name;	
-		$this->load->view('table_lists',$data);  
         $columns=$this->GetColumn($table_name);
         $columns=explode(",",$columns);
         $data['column']=$columns[0];      	
-		$this->load->view('table_records',$data);		
-		$this->load->view('div_end');
-		$this->load->view('div_end');		
-		$this->load->view('footer');
+		$this->load->view('table_records',$data);
     }
+    
     public function TruncateTable($table_name)
     {
       if($this->session->userdata('group')=='admin'){ 

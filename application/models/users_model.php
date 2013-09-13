@@ -100,18 +100,11 @@ class Users_model extends CI_Model {
 				'grant' => $this->input->post('grant'),
 				'pass_word' => $updatepass						
 			);
-		$username=$this->input->post('username');
-        $this->db->where('user_name', $username);
-        $query = $this->db->get('member');
-        if($query->num_rows > 0){
-            $result=false;
-         }
-        else{
-            $this->db->where('id', $id);
-            $this->db->update('member', $member_update_data);
-            $result=true;
-            if($this->input->post('username')==$this->session->userdata('user_name'))
-              {
+		$username=$this->input->post('username');                
+        $this->db->where('id', $id);
+        $this->db->update('member', $member_update_data);        
+        if($this->input->post('username')==$this->session->userdata('user_name'))
+         {
                  $data = array(
     				'user_name' => $this->input->post('username'),
     				'is_logged_in' => true,
@@ -119,8 +112,8 @@ class Users_model extends CI_Model {
                     'grant'=>$this->input->post('grant')
     			);
                 $this->session->set_userdata($data);
-              }
-        }
+         }
+       $result=true; 
        return $result; 
 	}
     

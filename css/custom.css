@@ -99,7 +99,25 @@ table.default td {
    float:right;
    padding-right: 12px;
 }
+.tbdiv{
+    height: 600px;
+    margin-top:50px;
+}
+.rcontent{
+    margin-left: 30px;
+    margin-top:50px;
+}
+.rmonitor{
+   margin-top:50px;  
+}
 
 #tablenames tr td{
     width:400px;
+}
+
+#navibar {
+ width:100%;
+ position:fixed;
+ top:0px; 
+ filter:alpha(Opacity=100);-moz-opacity:1.0;opacity: 1.0;z-index:100;
 }

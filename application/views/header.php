@@ -20,17 +20,19 @@
 	<link href="<?php echo $this->config->base_url();?>css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="<?php echo $this->config->base_url();?>css/kendo.common.min.css" rel="stylesheet">
     <link href="<?php echo $this->config->base_url();?>css/kendo.default.min.css" rel="stylesheet">
+    <link href="<?php echo $this->config->base_url();?>css/jPages.css" rel="stylesheet">
+   
 	<!-- end: CSS -->
 	
 	<!-- start: JavaScript -->
 	<script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
-     
-
-
-	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script>    
+	<script src="<?php echo $this->config->base_url();?>js/bootstrap.min.js"></script> 
+    
+    
     <script src="<?php echo $this->config->base_url();?>js/jquery.validate.min.js"></script> 
     <script src="<?php echo $this->config->base_url();?>js/kendo.web.min.js"></script>     
      <script src="<?php echo $this->config->base_url();?>js/jquery.mulitselector.js"></script>
+     <script src="<?php echo $this->config->base_url();?>js/jPages.min.js"></script>
       <script src="<?php echo $this->config->base_url();?>js/amcharts.js" type="text/javascript"></script> 
 	<!-- end: JavaScript-->
 
