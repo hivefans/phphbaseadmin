@@ -174,7 +174,7 @@ function closemodal(divid)
     </div>
     
     <div class="modal hide" id="searchtab">
-      <form class="form-horizontal" id="searchform" method="POST" action="<?php echo $this->config->base_url();?>index.php/tables/searchtable/<?php echo $tablename?>">
+      <form class="form-horizontal" id="searchform" method="POST">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>search table <?php echo $tablename?> </h3>
@@ -217,7 +217,7 @@ function closemodal(divid)
             
       </div>
       <div class="modal-footer"> 
-        <input type="submit" id="searchtable" class="btn btn-primary" value="search">
+        <input type="button" id="searchtable" class="btn btn-primary" value="search">
         <a href="javascript:;" class="btn" data-dismiss="modal">Cancel</a>
       </div>
       </form>
@@ -229,14 +229,18 @@ function closemodal(divid)
 
 
 <script>
-     
-  $(document).ready(function () {
-                    var crudServiceBaseUrl = "<?php echo $this->config->base_url();?>index.php/tables",
-                         
-                        dataSource = new kendo.data.DataSource({                            
+  
+function tablerecord(operation)
+{ 
+     var crudServiceBaseUrl = "<?php echo $this->config->base_url();?>index.php/tables";
+     var readurl;
+     if(operation=="list")
+      {
+         readurl=crudServiceBaseUrl+"/gettablerecords/<?php echo $tablename?>";
+         dataSource = new kendo.data.DataSource({                            
                             transport: {                            
                                 read:  {
-                                    url: crudServiceBaseUrl+"/gettablerecords/<?php echo $tablename?>",
+                                    url: readurl,
                                     dataType: "json"
                                 },                                
                                 update: {
@@ -275,9 +279,61 @@ function closemodal(divid)
                                         value: { type: "string", validation: { required: true } }
                                             }
                                       }                                      
-                                   },
-                            requestEnd: onRequestEnd
+                                   }
                         });
+      }
+      else if(operation=="search")
+      {
+          readurl=crudServiceBaseUrl+"/searchtablequery/<?php echo $tablename?>";
+          dataSource = new kendo.data.DataSource({                             
+                            transport: {                            
+                                read:  {
+                                    url: readurl,
+                                    dataType: "json",
+                                    type:"POST"
+                                                                     
+                                },                                
+                                update: {
+                                    url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
+                                    dataType: "json",
+                                    type:"GET"                                   
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl + "/destroyrecords/<?php echo $tablename?>",
+                                    dataType: "json",
+                                    type:"GET" 
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl + "/updaterecords/<?php echo $tablename?>",
+                                    dataType: "json",
+                                    type:"GET"
+                                },
+                                parameterMap: function(data, type) {                                    
+                                    if (type == "read") {                                        
+                                        return $('#searchform').serialize();
+                                    }
+                                    return data;
+                                }
+                            },                                              
+                            batch: true,                           
+                            pageSize: 10,                                                                                                            
+                            schema: {
+                               
+                                model: {
+                                    id: "row",
+                                    fields: { 
+                                        row: { editable: true, nullable: true,validation: { required: true} },                                        
+                                        columnfamily: { defaultValue: "<?php echo $column?>" },
+                                        columnqualifier: { type: "string", validation: { required: true} },
+                                        timestamp: {type: "number",validation: { min: 0, required: true },defaultValue: <?php echo time();?>},
+                                        value: { type: "string", validation: { required: true } }
+                                            }
+                                      }                                      
+                                   }
+                        });
+      }
+     
+     $(document).ready(function () {
                       
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
@@ -324,7 +380,13 @@ function closemodal(divid)
                              }  
                     };
                
- });           
-             
+    }); 
+ 
+}           
+tablerecord("list");
+$('#searchtable').click(function(){ 
+    closemodal('searchtab');    
+    tablerecord("search");
+});         
 </script>
 

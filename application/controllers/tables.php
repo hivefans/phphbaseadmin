@@ -180,7 +180,7 @@ class Tables extends CI_Controller
     
     public function SearchTableQuery($table_name)
     {       
-       $srow=$this->input->post("startrow");       
+       $srow=$this->input->post("startrow");
        $erow=$this->input->post("stoprow");
        $timestamp=$this->input->post("starttime");      
        $column=$this->input->post("column");       
@@ -195,9 +195,11 @@ class Tables extends CI_Controller
                 foreach($cols->columns as $key=>$vals)
                  {  
                     $row=$cols->row;                          
+                    $row=mysql_real_escape_string($row);                                            
                     $column=explode(":",$key);                        
-                    $value=$vals->value;                         
-                    $value=json_encode($value);                        
+                    $value=$vals->value;  
+                    $value=mysql_real_escape_string($value);                       
+                    $value=json_encode($value);                                     
                     $result=$result."{\"row\":\"".$row."\",\"columnfamily\":\"".$column[0]."\",\"columnqualifier\":\"".$column[1];
                     $result=$result."\",\"timestamp\":\"".$vals->timestamp."\",\"value\":".$value."},";
                   }
@@ -209,7 +211,7 @@ class Tables extends CI_Controller
         {
             $result='{"row":"no record"}'; 
         } 
-        return($result);
+        echo($result);
     }
     
     public function UpdateRecords($table_name)
