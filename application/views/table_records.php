@@ -64,10 +64,13 @@ function truntable()
        if (status=="success")
        {
           $('#truntable').text("Truncate");
-          $('#truntable').attr('disabled',false);          
-          alert(response);
+          $('#truntable').attr('disabled',false);
           closemodal("trun");
-          location.reload();
+          $('#resultdiv').show();
+          $('#resultinfo').html('truncate table <?php echo $tablename?> success!');
+          var grid = $("#grid").data("kendoGrid");
+          grid.dataSource.read();
+          grid.refresh();
        } 
     
    }) 
@@ -91,7 +94,7 @@ function deltable()
           $('#truntable').attr('disabled',false);          
           alert('delete table success');
           closemodal("deltab");
-          window.location= ('<?php echo $this->config->base_url();?>index.php'); 
+          window.location= ('<?php echo $this->config->base_url();?>'); 
        }
    }) 
      
@@ -102,6 +105,11 @@ function closemodal(divid)
 }
 
 </script>
+
+    <div id="resultdiv" class="alert alert-success hide">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <div id="resultinfo"></div> 
+    </div>
 
     <div>
         <h2><?php echo $tablename?></h2>
@@ -311,10 +319,8 @@ function closemodal(divid)
                 };
                    function onRequestEnd(e) { 
                        if(e.type=="update" || e.type=="create")
-                             {                                
-                                 alert(e.response[0].result);
-                                 location.reload();
-                                                                 
+                             { 
+                                $("#grid").data("kendoGrid").dataSource.read();                                  
                              }  
                     };
                

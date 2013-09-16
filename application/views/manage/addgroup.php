@@ -2,7 +2,7 @@
       if(isset($flash_message)){
         if($flash_message == TRUE)
         {
-          echo '<div class="alert alert-success">';
+          echo '<div class="alert alert-success rmonitor">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Well done!</strong> group info add with success.';
           echo '</div>';       
@@ -20,7 +20,7 @@
 
 <div id="sensors" class='boxit'>
 	
-<form action="<?php echo site_url("manage/addgroup")?>" method="post" class="form-horizontal">  
+    <form action="<?php echo site_url("manage/addgroup")?>" method="post" class="form-horizontal">  
       <fieldset>
           <div class="control-group">
             <label for="inputError" class="control-label">group name</label>
@@ -36,6 +36,6 @@
           </div>
         </fieldset>
 
-      </form>
+   </form>
 	 
 </div> 

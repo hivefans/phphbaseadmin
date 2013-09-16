@@ -102,7 +102,7 @@ class Users_model extends CI_Model {
 			);
 		$username=$this->input->post('username');                
         $this->db->where('id', $id);
-        $this->db->update('member', $member_update_data);        
+        $this->db->update('member', $member_update_data);
         if($this->input->post('username')==$this->session->userdata('user_name'))
          {
                  $data = array(

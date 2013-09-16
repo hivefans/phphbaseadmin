@@ -5,7 +5,7 @@
       if(isset($flash_message)){
         if($flash_message == TRUE)
         {
-          echo '<div class="alert alert-success">';
+          echo '<div class="alert alert-success rmonitor">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Well done!</strong> user info edit with success.';
           echo '</div>';       
