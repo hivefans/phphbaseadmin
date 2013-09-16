@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python26
 # -*- coding: utf8 -*-
 import os,sys,time
 from signal import SIGTERM
