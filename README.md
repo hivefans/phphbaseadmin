@@ -21,6 +21,9 @@ Main features：
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/search.png) 
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/record.png) 
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/metadata.png) 
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/zookeeper.png)
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/zkdata.png) 
+![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/zkstattrend.png) 
 
 <br>
 Install:
