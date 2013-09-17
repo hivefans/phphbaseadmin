@@ -217,7 +217,7 @@ function closemodal(divid)
             
       </div>
       <div class="modal-footer"> 
-        <input type="button" id="searchtable" class="btn btn-primary" value="search">
+        <input type="submit" id="searchtable" class="btn btn-primary" value="search">
         <a href="javascript:;" class="btn" data-dismiss="modal">Cancel</a>
       </div>
       </form>
@@ -384,9 +384,27 @@ function tablerecord(operation)
  
 }           
 tablerecord("list");
-$('#searchtable').click(function(){ 
-    closemodal('searchtab');    
-    tablerecord("search");
-});         
+$('#searchtable').click(function(){
+     
+  
+}); 
+$.validator.setDefaults({
+	submitHandler: function() { 
+      closemodal('searchtab');    
+      tablerecord("search");
+	}
+});
+$().ready(function() {
+	   $("#searchform").validate({
+	       rules: {
+             startrow: "required"
+           },
+           messages: {
+             startrow: "Please input start row key"
+            }
+	   });
+}); 
+
+       
 </script>
 
