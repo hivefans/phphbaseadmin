@@ -129,6 +129,28 @@ class Hbase_table_model extends CI_Model
 			echo 'Caught exception: '.  $e->getMessage(). "\n";
 		}
 	}
+    
+    public function get_table_columns($table_name)
+    {
+        try
+        {
+           $this->transport->open();
+           $descriptors = $this->hbase->getColumnDescriptors($table_name);
+           $columns="";
+           foreach($descriptors as $key=>$value)
+            {
+                $columns.=str_replace(":","",$key).",";
+            } 
+            $columns=rtrim($columns,",");
+            return $columns;
+        }
+        catch (Exception $e)
+		{
+			echo 'Caught exception: '.  $e->getMessage(). "\n";
+		}
+		
+    } 
+    
     public function get_table_records($table_name,$count)
     {
         try
@@ -166,6 +188,13 @@ class Hbase_table_model extends CI_Model
               {                
                 $result=$this->hbase->getRow($table_name,$startrow);
               }
+           if($startrow!="" && $stoprow!="" && $timestamp=="" && $column=="")
+              { 
+                $allcolumns=$this->get_table_columns($table_name);
+                $columns=explode(",",$allcolumns);                
+                $record=$this->hbase->scannerOpenWithStop($table_name,$startrow,$stoprow,$columns);
+                $result=$this->hbase->scannerGetList($record,$count);
+              }   
            if($startrow!="" && $stoprow=="" && $column=="" && $timestamp!="")
               {
                 $result=$this->hbase->getRowTs($table_name,$startrow,$timestamp);                
@@ -182,7 +211,7 @@ class Hbase_table_model extends CI_Model
               }
            if($startrow!="" && $timestamp=="" && $stoprow!="" && $column!="")
               {
-                $columns=explode(",",$column);
+                $columns=explode(",",$column);                
                 $record=$this->hbase->scannerOpenWithStop($table_name,$startrow,$stoprow,$columns);
                 $result=$this->hbase->scannerGetList($record,$count);
               }

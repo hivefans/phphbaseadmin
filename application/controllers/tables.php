@@ -211,7 +211,7 @@ class Tables extends CI_Controller
         {
             $result='{"row":"no record"}'; 
         } 
-        echo($result);
+        print_r($result);
     }
     
     public function UpdateRecords($table_name)
