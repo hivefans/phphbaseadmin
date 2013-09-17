@@ -109,7 +109,7 @@ class Manage extends CI_Controller
            $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]'); 
            $this->form_validation->set_rules('grant', 'Grant', 'trim|required');
-           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error rmonitor"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
            if ($this->form_validation->run())
             {
                 if($this->users_model->create_member()){

@@ -5,12 +5,12 @@
       if(isset($flash_message)){
         if($flash_message == TRUE)
         {
-          echo '<div class="alert alert-success">';
+          echo '<div class="alert alert-success rmonitor">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Well done!</strong> new user created with success.';
           echo '</div>';       
         }else{
-          echo '<div class="alert alert-error">';
+          echo '<div class="alert alert-error rmonitor">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Username already taken</strong>';
           echo '</div>';          
