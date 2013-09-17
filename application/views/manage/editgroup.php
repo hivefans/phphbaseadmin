@@ -2,13 +2,13 @@
       if(isset($flash_message)){
         if($flash_message == TRUE)
         {
-          echo '<div class="alert alert-success">';
+          echo '<div class="alert alert-success rmonitor">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Well done!</strong> group info edit with success.';
           echo '</div>';       
         }
         else{
-           echo '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>group name already exists</strong></div>';
+           echo '<div class="alert alert-error rmonitor"><a class="close" data-dismiss="alert">×</a><strong>group name already exists</strong></div>';
         }
       }
       ?>

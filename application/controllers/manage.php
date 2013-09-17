@@ -143,7 +143,7 @@ class Manage extends CI_Controller
            $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
            $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');            
            $this->form_validation->set_rules('grant', 'Grant', 'trim|required');
-           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error rmonitor"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
            if ($this->form_validation->run())
             {
                 if($this->users_model->update_member($id)){
@@ -168,7 +168,7 @@ class Manage extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') === 'POST')
           {           
            $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|min_length[4]');
-           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error rmonitor"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
           } 
         if ($this->form_validation->run())
           {
@@ -192,7 +192,7 @@ class Manage extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') === 'POST')
           {           
            $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|min_length[4]');
-           $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+           $this->form_validation->set_error_delimiters('<div class="alert alert-error rmonitor"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
           } 
         if ($this->form_validation->run())
           {
