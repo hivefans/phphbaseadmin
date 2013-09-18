@@ -54,5 +54,4 @@ Main features：
 (5) 打开浏览器访问 http://serverip/phphbaseadmin，缺省用户名admin 密码admin888登录
 (6) 登录后选择 system->user manager 菜单设置用户所属hbase table表的所属权限
 (7) 选择 Tables->view 菜单即可查看hbase table 记录。
-(5) 
 
