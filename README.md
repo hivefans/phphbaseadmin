@@ -1,7 +1,7 @@
 phphbaseadmin
 =============
 
-phphbaseadmin is a hbase admin web tool,it developed using thrift interface、php CodeIgniter framework .
+phphbaseadmin is a hbase admin web tool,it developed using thrift interface,php (CodeIgniter),python(cherrypy,kazoo),bootstrap,kendo ui,jquery and so on.
 
 Main features：
 --------------
@@ -26,6 +26,14 @@ Main features：
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/zkstattrend.png) 
 
 <br>
+##Support
+. Support  CentOS 5.x or 6.x,Uses Apache Hbase or Cloudera Hbase 0.92 or later
+## Prerequisites
+1. apache or nginx,php,mysql server
+2. Python 2.6 or later from <http://www.python.org/getit/>
+3. cherrypy from <http://www.cherrypy.org/>
+4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
+5. Apache Hbase thrift server 
 Install:
 --------------------
 (1) execute script setup_centos5.sh or setup_centos6.sh to install apache php mysql-server <br>

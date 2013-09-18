@@ -32,7 +32,7 @@ CREATE TABLE `member` (
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', 'admin', 'admin', '7fef6171469e80d32c0559f88b377245', 'shidongjie@baofeng.com', 'user_test,user_behavior_attribute_noregistered_test,user_behavior_attribute_noregistered_mid_uid_index,user_behavior_attribute_noregistered_index,user_behavior_attribute_noregistered,user_behavior_attribute,tsdb-uid,tsdb,test,movie_fav_visitor_list,movie_fav_user_list,message_visitor,message_user');
+INSERT INTO `member` VALUES ('1', 'admin', 'admin', '7fef6171469e80d32c0559f88b377245', 'shidongjie@baofeng.com', 'test');
 
 -- ----------------------------
 -- Table structure for usergroup
