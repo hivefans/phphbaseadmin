@@ -44,5 +44,7 @@ Install:
 (4) create database phphbaseadmin in mysql server ,import database/phphbaseadmin.sql,edit application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
 <br>
 (5) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
+(6) after the user login,select system->user manager menu to set user table grant
+(7) select Tables->view menu to view table record
 
 
