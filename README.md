@@ -43,10 +43,10 @@ Main features：
 (3) modify config.inc.php ,$configure['hbase_host']=your hbase thrift server <br>
 (4) create database phphbaseadmin in mysql server ,import database/phphbaseadmin.sql,edit application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
 <br>
-(5) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
-(6) after the user login,select system->user manager menu to set user table grant
-(7) select Tables->view menu to view table record
-##  安装方法 <br>
+(5) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888 <br>
+(6) after the user login,select system->user manager menu to set user table grant <br>
+(7) select Tables->view menu to view table record <br>
+##  安装方法 
 (1) 使用根目录中的 setup_centos5.sh 或者setup_centos6.sh 脚本安装所需环境<br>
 (2) 启动hbase thrift server    <br> 
 (3) 修改根目录中的配置文件 config.inc.php,修改$configure['hbase_host']=你的thrift server服务器地址<br>
