@@ -34,8 +34,8 @@ Main features：
 3. cherrypy from <http://www.cherrypy.org/>
 4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
 5. Apache Hbase thrift server 
-Install:
---------------------
+##  Install:
+--------------------<br>
 (1) execute script setup_centos5.sh or setup_centos6.sh to install apache php mysql-server <br>
 (2) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
      hbase thrift start  or  bin/hbase-daemon.sh start thrift
@@ -46,5 +46,13 @@ Install:
 (5) open http://serverip/phphbaseadmin in your browser, default user is admin ,password is admin888
 (6) after the user login,select system->user manager menu to set user table grant
 (7) select Tables->view menu to view table record
-
+##  安装方法 <br>
+(1) 使用根目录中的 setup_centos5.sh 或者setup_centos6.sh 脚本安装所需环境
+(2) 启动hbase thrift server     
+(3) 修改根目录中的配置文件 config.inc.php,修改$configure['hbase_host']=你的thrift server服务器地址
+(4) 在mysql server中创建数据库phphbaseadmin ,导入database/phphbaseadmin.sql文件，修改application/config/database.php,$db['default']['hostname']、 $db['default']['username'] 、$db['default']['password'] = '';
+(5) 打开浏览器访问 http://serverip/phphbaseadmin，缺省用户名admin 密码admin888登录
+(6) 登录后选择 system->user manager 菜单设置用户所属hbase table表的所属权限
+(7) 选择 Tables->view 菜单即可查看hbase table 记录。
+(5) 
 
