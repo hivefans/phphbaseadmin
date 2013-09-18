@@ -33,9 +33,10 @@ Main features：
 2. Python 2.6 or later from <http://www.python.org/getit/>
 3. cherrypy from <http://www.cherrypy.org/>
 4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
-5. Apache Hbase thrift server 
-##  Install:
---------------------<br>
+5. Apache Hbase thrift server <br>
+
+Install:
+--------------------
 (1) execute script setup_centos5.sh or setup_centos6.sh to install apache php mysql-server <br>
 (2) Follow the standard instructions for installing and running the HBase server ,start thrift server  <br>
      hbase thrift start  or  bin/hbase-daemon.sh start thrift
