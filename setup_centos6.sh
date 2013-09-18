@@ -10,14 +10,16 @@ yum install -y php53 php53-cli php53-devel php53-common httpd httpd-devel php53-
 cd /var/www/html
 git clone https://github.com/hivefans/phphbaseadmin
 yum -y install python26 
+cd phphbaseadmin/cherrypy
  sh setuptools-0.6c11-py2.6.egg 
  tar zxvf pip-1.4.1.tar.gz
- cd pip-1.4.1.tar.gz
+ cd pip-1.4.1
  python26 setup.py install
  pip install kazoo
  cd ..
  tar zxvf CherryPy-3.2.2.tar.gz
  cd CherryPy-3.2.2
  python26 setup.py install 
+ cd ..
  python26 zookeeperadmin.py start
  echo "All done.open http://your_ip/phphbaseadmin from your web browser"
