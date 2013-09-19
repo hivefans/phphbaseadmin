@@ -19,7 +19,7 @@ cd phphbaseadmin/cherrypy
  cd ..
  tar zxvf CherryPy-3.2.2.tar.gz
  cd CherryPy-3.2.2
+ python26 setup.py install
  cd ..
- python26 setup.py install 
  python26 zookeeperadmin.py start
  echo "All done.open http://your_ip/phphbaseadmin from your web browser"
