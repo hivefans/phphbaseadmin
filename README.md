@@ -35,6 +35,8 @@ Main features：
 4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
 5. Apache Hbase thrift server <br>
 
+本作品正在参加阿里云开发者大赛( http://dasai.aliyun.com/signup/works2013/?search=458 )，您的一票就是对我最大的支持！
+
 Install:
 --------------------
 (1) execute script setup_centos5.sh or setup_centos6.sh to install apache php mysql-server <br>
