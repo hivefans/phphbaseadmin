@@ -50,28 +50,14 @@
 <!--add table div -->
 <script>
 function showaddtable()
-{
-   <?php
-     if($this->session->userdata('group')=='admin')
-      {
-   ?> 
+{  
    $('#addtablediv').modal({
          backdrop:true
       })
-    <?php
-      }
-      else
-      {
-         echo 'alert("sorry,No authority!")';
-      }    
-    ?> 
 }
 function showdeltable()
 {
-    <?php
-     if($this->session->userdata('group')=='admin')
-      {
-   ?> 
+    
    $.getJSON('<?php echo $this->config->base_url();?>index.php/tables/tablelist/', function(json){
 	var names = json.table_names;
 	var html="";
@@ -86,14 +72,7 @@ function showdeltable()
    $('#deltabdiv').modal({
          backdrop:true
       });
-   $('#chkAll').attr("checked",false);
-    <?php
-      }
-      else
-      {
-         echo 'alert("sorry,No authority!")';
-      }    
-    ?>  
+   $('#chkAll').attr("checked",false);   
 }
 
 $(function() {   

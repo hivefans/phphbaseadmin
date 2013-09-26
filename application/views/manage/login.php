@@ -8,6 +8,34 @@
     <link rel="stylesheet" href="<?php echo $this->config->base_url();?>css/login.css">
     <link id="bootstrap-style" href="<?php echo $this->config->base_url();?>css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet'>
+    <style type="text/css" media="screen">
+      .ribbon {
+        background-color: #a00;
+        overflow: hidden;
+        /* top left corner */
+        position: absolute;
+        left: -3em;
+        top: 2.5em;
+        /* 45 deg ccw rotation */
+        -moz-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        /* shadow */
+        -moz-box-shadow: 0 0 1em #888;
+        -webkit-box-shadow: 0 0 1em #888;
+      }
+      .ribbon a {
+        border: 1px solid #faa;
+        color: #fff;
+        display: block;
+        font: bold 81.25% 'Helvetiva Neue', Helvetica, Arial, sans-serif;
+        margin: 0.05em 0 0.075em 0;
+        padding: 0.5em 3.5em;
+        text-align: center;
+        text-decoration: none;
+        /* shadow */
+        text-shadow: 0 0 0.5em #444;
+      }
+    </style>
     <!-- jQuery framework -->
         <script src="<?php echo $this->config->base_url();?>js/jquery-1.8.3.min.js"></script>
     <!-- validation -->
@@ -48,6 +76,9 @@
     </script>
 </head>
 <body>
+    <div class="ribbon">
+    <a href="#">Fork me on GitHub</a>
+    </div>
     <div id="login-wrapper" class="clearfix">
         <div class="main-col">
             <img src="<?php echo $this->config->base_url();?>img/hbase.png" alt="" class="logo_img" />
