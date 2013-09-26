@@ -27,7 +27,7 @@ CREATE TABLE `member` (
   `email_address` varchar(255) DEFAULT NULL,
   `grant` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of member
@@ -58,7 +58,7 @@ CREATE TABLE `zookeeper_cluster` (
   `cluster_name` varchar(255) NOT NULL,
   `server_list` varchar(255) NOT NULL,
   PRIMARY KEY (`cluster_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zookeeper_cluster
