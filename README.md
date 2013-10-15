@@ -35,7 +35,10 @@ Main features：
 4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
 5. Apache Hbase thrift server <br>
 
-本作品正在参加阿里云开发者大赛( http://dasai.aliyun.com/signup/works2013/?search=458 )，您的一票就是对我最大的支持！
+##To Do
+1. hbase 分表监控和其他参数监控。
+2. 所有hbase记录分页浏览。
+3. 数据查询条件增加filter。
 
 Install:
 --------------------
