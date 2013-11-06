@@ -99,6 +99,12 @@ function deltable()
    }) 
      
 }
+function tbcountdailog()
+{    
+    $('#tbcounttab').modal({
+         backdrop:true
+      })
+}
 function closemodal(divid)
 {
     $('#'+divid).modal('hide');
@@ -127,6 +133,9 @@ function closemodal(divid)
        </div>
         <div class="btn-group">
           <a class="btn btn-danger" href="javascript:;" onclick="deldialog();"><i class="icon-remove icon-white"></i> delete table</a>            
+       </div>
+       <div class="btn-group">
+          <a class="btn btn-success" href="javascript:;" onclick="tbcountdailog();"><i class="icon-white icon-list"></i>table count</a>                     
        </div>
         
     </div>
@@ -172,6 +181,26 @@ function closemodal(divid)
         <a href="javascript:;" class="btn" onclick="closemodal('deltab');">Cancel</a>
       </div>
     </div>
+    
+    <div class="modal hide" id="tbcounttab">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>table <?php echo $tablename?>  count</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped  table-hover" id="tb-monitor">
+          <tr><th>key</th><th>value</th></tr>
+          <tbody>  
+              <tr><td>table size</td><td><?php echo $storefileSizeMB?> MB</td></tr>             
+              <tr><td>read Requests Count</td><td><?php echo $readRequestsCount?></td></tr>
+              <tr><td>requests Count</td><td><?php echo $requestsCount?></td></tr> 
+              <tr><td>write Requests Count</td><td><?php echo $writeRequestsCount?></td></tr>
+          </tbody>
+        
+        </table>
+      </div>
+     
+    </div>    
     
     <div class="modal hide" id="searchtab">
       <form class="form-horizontal" id="searchform" method="POST">
@@ -227,7 +256,7 @@ function closemodal(divid)
       <div id="grid"></div>       
     </div>
 
-
+    
 <script>
   
 function tablerecord(operation)
