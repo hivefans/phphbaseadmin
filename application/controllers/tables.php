@@ -27,7 +27,7 @@ class Tables extends CI_Controller
     {
        $this->load->model('hbase_table_model', 'table'); 
        $hbaseinfo =$this->table->get_hbase_info();
-        $hbasedata=json_decode($hbaseinfo,true);
+       $hbasedata=json_decode($hbaseinfo,true);
         foreach($hbasedata["beans"] as $mbean)
          {
             if ($mbean["name"] == "hadoop:service=HBase,name=Info") 
@@ -273,7 +273,44 @@ class Tables extends CI_Controller
 		$data['tablename']=$table_name;	
         $columns=$this->GetColumn($table_name);
         $columns=explode(",",$columns);
-        $data['column']=$columns[0];      	
+        $data['column']=$columns[0]; 
+        $this->load->model('hbase_table_model', 'table'); 
+        $hbaseinfo =$this->table->get_hbase_info();
+        $hbaseinfo=json_decode($hbaseinfo,true);
+        $table_size=0;
+        $readRequestsCount=0;
+        $requestsCount=0;
+        $writeRequestsCount=0;
+        foreach($hbaseinfo['beans'] as $mbeans)
+         {
+            if($mbeans['name']=='hadoop:service=Master,name=Master')
+             {
+                foreach($mbeans['RegionServers'] as $regionkey=>$regionvalue)
+                 {
+                    $regionserver=explode(',',$regionvalue['key']);
+                    $regionload=$regionvalue['value']['regionsLoad'];
+                    foreach($regionload as $regionbean)
+                     {
+                        $regiontb=$regionbean['value']['nameAsString'];
+                        $regiontbnamearr=explode(',',$regiontb);
+                        $regiontbname=$regiontbnamearr[0];
+                        if($regiontbname==$table_name)
+                         {
+                            $table_size+=$regionbean['value']['storefileSizeMB'];
+                            $readRequestsCount+=$regionbean['value']['readRequestsCount'];
+                            $requestsCount+=$regionbean['value']['requestsCount'];
+                            $writeRequestsCount+=$regionbean['value']['writeRequestsCount'];
+                         }
+                        
+                     }
+                 } 
+                 
+             }
+         }        
+        $data['storefileSizeMB']=$table_size; 
+        $data['readRequestsCount']=$readRequestsCount;
+        $data['requestsCount']=$requestsCount;
+        $data['writeRequestsCount']=$writeRequestsCount;             	
 		$this->load->view('table_records',$data);
     }
     
