@@ -191,7 +191,7 @@ function closemodal(divid)
         <table class="table table-bordered table-striped  table-hover" id="tb-monitor">
           <tr><th>key</th><th>value</th></tr>
           <tbody>  
-              <tr><td>table size</td><td><?php echo $storefileSizeMB?> MB</td></tr>             
+              <tr><td>table size</td><td><?php echo $storefileSizeMB?> </td></tr>             
               <tr><td>read Requests Count</td><td><?php echo $readRequestsCount?></td></tr>
               <tr><td>requests Count</td><td><?php echo $requestsCount?></td></tr> 
               <tr><td>write Requests Count</td><td><?php echo $writeRequestsCount?></td></tr>

@@ -306,8 +306,18 @@ class Tables extends CI_Controller
                  } 
                  
              }
-         }        
-        $data['storefileSizeMB']=$table_size; 
+         } 
+        if($table_size>1024)
+        {
+           $data['storefileSizeMB']= round($table_size/1024,2) ." TB";
+        }
+        else
+        {
+           $data['storefileSizeMB']= $table_size." MB"; 
+        }
+        
+                
+        //$data['storefileSizeMB']=$table_size; 
         $data['readRequestsCount']=$readRequestsCount;
         $data['requestsCount']=$requestsCount;
         $data['writeRequestsCount']=$writeRequestsCount;             	
