@@ -26,25 +26,21 @@ class Tables extends CI_Controller
     public function Gethbaseinfo()
     {
        $this->load->model('hbase_table_model', 'table'); 
-       $hbaseinfo =$this->table->get_hbase_info();
-       $hbasedata=json_decode($hbaseinfo,true);
-        foreach($hbasedata["beans"] as $mbean)
-         {
-            if ($mbean["name"] == "hadoop:service=HBase,name=Info") 
-            {
-                $data['version']=$mbean['version'].', r'.$mbean['revision'];  
-            }
-            elseif ($mbean["name"] =="hadoop:service=Master,name=Master")
-            {
-                $data['ServerName']=explode(",",$mbean["ServerName"]);
-                $data['ZookeeperQuorum']=$mbean["ZookeeperQuorum"];
-                $data['DeadRegionServers']=$mbean["DeadRegionServers"];
-                $data['AverageLoad']=$mbean['AverageLoad'];
-                $data['MasterStartTime']=round($mbean["MasterStartTime"]/1000, 0);
-                $data["live_regionservers"] = count($mbean["RegionServers"]);
-                $data["Coprocessors"]=$mbean["Coprocessors"]; 
-            }            
-         }
+       $queryinfo="hadoop:service=HBase,name=Info";
+       $hbaseinfo =$this->table->get_hbase_info($queryinfo);
+       $hbasedata=json_decode($hbaseinfo,true);       
+       $data['version']=$hbasedata['beans'][0]['version'].', r'.$hbasedata['beans'][0]['revision'];
+       $queryname="hadoop:service=Master,name=Master";
+       $hbasename =$this->table->get_hbase_info($queryname);
+       $hbasedata=json_decode($hbasename,true);
+       $data['ServerName']=explode(",",$hbasedata['beans'][0]["ServerName"]);
+       $data['ZookeeperQuorum']=$hbasedata['beans'][0]["ZookeeperQuorum"];
+       $data['DeadRegionServers']=$hbasedata['beans'][0]["DeadRegionServers"];
+       $data['AverageLoad']=$hbasedata['beans'][0]['AverageLoad'];
+       $data['MasterStartTime']=round($hbasedata['beans'][0]["MasterStartTime"]/1000, 0);
+       $data["live_regionservers"] = count($hbasedata['beans'][0]["RegionServers"]);
+       $data["Coprocessors"]=$hbasedata['beans'][0]["Coprocessors"]; 
+       
         $this->load->view('table_admin', $data); 
     }
 	
@@ -267,57 +263,62 @@ class Tables extends CI_Controller
         
     }
     
-    
+    public function size_readify($size, $precise=1)
+    {
+       $byte_map = array('GB', 'TB');
+       $level = 0;
+       while ($size >= 1024)
+       {
+         $size = $size / 1024.0;
+         $level += 1;
+       }
+      return round($size, $precise).' '.$byte_map[$level];    
+        
+    }
     public function ListTableRecords($table_name)
     {	
 		$data['tablename']=$table_name;	
         $columns=$this->GetColumn($table_name);
         $columns=explode(",",$columns);
         $data['column']=$columns[0]; 
-        $this->load->model('hbase_table_model', 'table'); 
-        $hbaseinfo =$this->table->get_hbase_info();
+        $this->load->model('hbase_table_model', 'table');
+        $query= 'hadoop:service=Master,name=Master';
+        $hbaseinfo =$this->table->get_hbase_info($query);
         $hbaseinfo=json_decode($hbaseinfo,true);
         $table_size=0;
         $readRequestsCount=0;
         $requestsCount=0;
-        $writeRequestsCount=0;
-        foreach($hbaseinfo['beans'] as $mbeans)
+        $writeRequestsCount=0;      
+        foreach($hbaseinfo['beans'][0]['RegionServers'] as $regionkey=>$regionvalue)
          {
-            if($mbeans['name']=='hadoop:service=Master,name=Master')
+            $regionserver=explode(',',$regionvalue['key']);
+            $regionload=$regionvalue['value']['regionsLoad'];
+            foreach($regionload as $regionbean)
              {
-                foreach($mbeans['RegionServers'] as $regionkey=>$regionvalue)
+                $regiontb=$regionbean['value']['nameAsString'];
+                $regiontbnamearr=explode(',',$regiontb);
+                $regiontbname=$regiontbnamearr[0];
+                if($regiontbname==$table_name)
                  {
-                    $regionserver=explode(',',$regionvalue['key']);
-                    $regionload=$regionvalue['value']['regionsLoad'];
-                    foreach($regionload as $regionbean)
-                     {
-                        $regiontb=$regionbean['value']['nameAsString'];
-                        $regiontbnamearr=explode(',',$regiontb);
-                        $regiontbname=$regiontbnamearr[0];
-                        if($regiontbname==$table_name)
-                         {
-                            $table_size+=$regionbean['value']['storefileSizeMB'];
-                            $readRequestsCount+=$regionbean['value']['readRequestsCount'];
-                            $requestsCount+=$regionbean['value']['requestsCount'];
-                            $writeRequestsCount+=$regionbean['value']['writeRequestsCount'];
-                         }
-                        
-                     }
-                 } 
-                 
+                    $table_size+=$regionbean['value']['storefileSizeMB'];
+                    $readRequestsCount+=$regionbean['value']['readRequestsCount'];
+                    $requestsCount+=$regionbean['value']['requestsCount'];
+                    $writeRequestsCount+=$regionbean['value']['writeRequestsCount'];
+                 }
+                
              }
          } 
-        if($table_size>1024)
-        {
-           $data['storefileSizeMB']= round($table_size/1024,2) ." TB";
-        }
-        else
-        {
-           $data['storefileSizeMB']= $table_size." MB"; 
-        }
+                 
+        $data['storefileSizeMB']=$this->size_readify($table_size);
+        //if($table_size>1024)
+//        {
+//           $data['storefileSizeMB']= round($table_size/1024,2) ." TB";
+//        }
+//        else
+//        {
+//           $data['storefileSizeMB']= $table_size." MB"; 
+//        }
         
-                
-        //$data['storefileSizeMB']=$table_size; 
         $data['readRequestsCount']=$readRequestsCount;
         $data['requestsCount']=$requestsCount;
         $data['writeRequestsCount']=$writeRequestsCount;             	
