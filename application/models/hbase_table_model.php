@@ -53,13 +53,13 @@ class Hbase_table_model extends CI_Model
         $this->load->view('nav_bar',$data);  
     }
 	
-    public function get_hbase_info()
+    public function get_hbase_info($query)
     {
         try
         {
            $host=$this->hbase_host;
            $port=$this->hbaseadmin_port;
-           $url="http://".$host.":".$port."/jmx";
+           $url="http://".$host.":".$port."/jmx?qry=".$query;
            $data=file_get_contents($url);
            return $data;
         }

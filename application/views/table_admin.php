@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td>DeadRegionServers</td>
-      <td><?php echo implode('',$DeadRegionServers)?> </td>
+      <td><?php echo implode(' ;',$DeadRegionServers)?> </td>
     </tr>
     <tr>
       <td>AverageLoad</td>
