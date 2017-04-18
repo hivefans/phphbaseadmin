@@ -27,7 +27,7 @@ Main features：
 ![ScreenShot](https://raw.github.com/hivefans/phphbaseadmin/master/screeshot/zkstattrend.png) 
 
 <br>
-##Support
+## Support
 . Support  CentOS 5.x or 6.x,Uses Apache Hbase or Cloudera Hbase 0.92 or later
 ## Prerequisites
 1. apache or nginx,php,mysql server
@@ -36,7 +36,7 @@ Main features：
 4. kazoo from <https://kazoo.readthedocs.org/en/latest/>
 5. Apache Hbase thrift server <br>
 
-##To Do
+## To Do
 1. hbase 分表监控和其他参数监控。
 2. 所有hbase记录分页浏览。
 3. 数据查询条件增加filter。
