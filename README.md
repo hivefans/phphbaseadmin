@@ -66,3 +66,7 @@ Install:
 (6) 登录后选择 system->user manager 菜单设置用户所属hbase table表的所属权限<br>
 (7) 选择 Tables->view 菜单即可查看hbase table 记录。
 
+
+## Future plans
+
+实现使用docker一键安装部署
