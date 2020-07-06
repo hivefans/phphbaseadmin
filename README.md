@@ -3,6 +3,8 @@ phphbaseadmin
 
 phphbaseadmin is a hbase admin web tool,it developed using thrift interface,php (CodeIgniter),python(cherrypy,kazoo),bootstrap,kendo ui,jquery and so on.
 
+
+
 phphbaseadmin is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial
 
 <a href="https://tracking.gitads.io/?repo=phphbaseadmin"><img src="https://images.gitads.io/phphbaseadmin" alt="GitAds"/> </a>
