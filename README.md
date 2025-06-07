@@ -47,6 +47,8 @@ Main features：
 1. hbase 分表监控和其他参数监控。
 2. 所有hbase记录分页浏览。
 3. 数据查询条件增加filter。
+4. 集群监控
+5. docker一键部署
 
 Install:
 --------------------
