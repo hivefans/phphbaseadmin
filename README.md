@@ -71,6 +71,10 @@ Install:
 (6) 登录后选择 system->user manager 菜单设置用户所属hbase table表的所属权限<br>
 (7) 选择 Tables->view 菜单即可查看hbase table 记录。
 
+## 赞助
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
+
 
 ## Future plans
 
